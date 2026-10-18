@@ -31,7 +31,7 @@ Pin dependency versions in `pyproject.toml`.
 
 ## Pipeline steps and progress
 
-1. [x] Setup: venv, deps, `rag/config.py`, README, git init. Files are staged; nothing is committed yet.
+1. [x] Setup: venv, deps, `rag/config.py`, README, git init. Pushed to github.com/MutazAbueisheh/rag-handbook (private), branch `main`.
 2. [x] Load (`rag/load.py`): walk `.md` files, parse front matter, build metadata
    (`path`, `url`, `title`, `description`, `section`), and print corpus stats.
    Start with the sections in `config.DEFAULT_SECTIONS`.
