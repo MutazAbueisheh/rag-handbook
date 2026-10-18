@@ -1,0 +1,11 @@
+[project]
+name = "rag-handbook"
+version = "0.1.0"
+description = "A from-scratch RAG over the GitLab public handbook"
+requires-python = ">=3.11"
+dependencies = [
+    "python-frontmatter==1.3.0",
+    "chromadb==1.5.9",
+    "ollama==0.6.3",
+    "anthropic==1.15.0",
+]
