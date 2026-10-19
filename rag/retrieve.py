@@ -92,20 +92,53 @@ def rewrite_queries(question: str) -> list[str]:
     return queries[:config.REWRITE_N]
 
 
+# --- Reranking ------------------------------------------------------------------
+# Search compares the question with each chunk separately and cheaply (one vector, one keyword score).
+# A reranker reads the question and many chunks together, so it can tell "how many vacation days
+# can I take" apart from "how do I request vacation days". It is too slow to run on every chunk,
+# so it only re-orders the few candidates that search already found.
+
+RERANK_PROMPT = """Below is a question and {n} numbered passages from GitLab's company handbook. \
+Pick the passages that best answer the question, most useful first. A passage that directly states the \
+answer beats one that only mentions the same topic. Reply with the passage numbers only, comma-separated, \
+at most {top}.
+
+Question: {question}
+
+{passages}"""
+
+
+def rerank(question: str, hits: list[Hit], top: int) -> list[Hit]:
+    """Re-order `hits`: the LLM's picks first, then the rest in their original order."""
+    import re
+    from rag.llm import complete  # imported here: only needed when reranking
+
+    passages = "\n\n".join(f"[{i}] {h.text[:1500]}" for i, h in enumerate(hits, 1))
+    prompt = RERANK_PROMPT.format(n=len(hits), top=top, question=question, passages=passages)
+    reply = complete([{"role": "user", "content": prompt}], llm=config.RERANK_LLM)
+    picked = []
+    for n in map(int, re.findall(r"\d+", reply)):
+        if 1 <= n <= len(hits) and n - 1 not in picked:
+            picked.append(n - 1)
+    rest = [i for i in range(len(hits)) if i not in picked]
+    return [hits[i] for i in picked + rest]
+
+
 # --- Putting it together ----------------------------------------------------------
 
 def retrieve(question: str, k: int = config.TOP_K, section: str | list[str] | None = None,
-             mode: str | None = None, rewrite: bool | None = None) -> list[Hit]:
+             mode: str | None = None, rewrite: bool | None = None, use_rerank: bool | None = None) -> list[Hit]:
     # Read the config at call time (not as default values), so the eval can switch modes.
     mode = mode or config.RETRIEVAL_MODE
     rewrite = config.QUERY_REWRITE if rewrite is None else rewrite
+    use_rerank = config.RERANK if use_rerank is None else use_rerank
     collection = get_collection()
     if collection.count() == 0:
         raise SystemExit("The index is empty. Run: .venv/bin/python -m rag.index")
     sections = [section] if isinstance(section, str) else section
     where = {"section": {"$in": sections}} if sections else None
 
-    if mode == "vector" and not rewrite:
+    if mode == "vector" and not rewrite and not use_rerank:
         # The original step 6 path: one vector search, scores are cosine similarities.
         res = collection.query(query_embeddings=[embed_query(question)], n_results=k, where=where,
                                include=["documents", "metadatas", "distances"])
@@ -121,7 +154,8 @@ def retrieve(question: str, k: int = config.TOP_K, section: str | list[str] | No
         rankings.append(vector_search(q, config.FUSION_CANDIDATES, where))
         if mode == "hybrid":
             rankings.append(bm25_search(q, config.FUSION_CANDIDATES, sections))
-    fused = sorted(rrf(rankings).items(), key=lambda x: x[1], reverse=True)[:k]
+    keep = max(k, config.RERANK_CANDIDATES) if use_rerank else k
+    fused = sorted(rrf(rankings).items(), key=lambda x: x[1], reverse=True)[:keep]
 
     ids, docs, metas, _ = corpus()
     position = {id_: i for i, id_ in enumerate(ids)}
@@ -130,7 +164,7 @@ def retrieve(question: str, k: int = config.TOP_K, section: str | list[str] | No
         i = position[id_]
         m = metas[i]
         hits.append(Hit(score, docs[i], m["url"], m["title"], m["heading"], m["section"], id_))
-    return hits
+    return rerank(question, hits, top=k)[:k] if use_rerank else hits
 
 
 def print_hits(hits: list[Hit], chars: int = 300) -> None:
@@ -150,13 +184,16 @@ def main() -> None:
     parser.add_argument("--mode", choices=("vector", "hybrid"), default=None, help=f"default: {config.RETRIEVAL_MODE}")
     parser.add_argument("--rewrite", action=argparse.BooleanOptionalAction, default=None,
                         help="let an LLM rewrite the question into extra search queries")
+    parser.add_argument("--rerank", action=argparse.BooleanOptionalAction, default=None,
+                        help="let an LLM re-order the top candidates")
     parser.add_argument("--chars", type=int, default=300, help="characters of each chunk to show")
     args = parser.parse_args()
 
     if args.rewrite or (args.rewrite is None and config.QUERY_REWRITE):
         print("Rewritten queries:", *rewrite_queries(args.question), sep="\n  ")
         print()
-    print_hits(retrieve(args.question, k=args.k, section=args.section, mode=args.mode, rewrite=args.rewrite),
+    print_hits(retrieve(args.question, k=args.k, section=args.section, mode=args.mode, rewrite=args.rewrite,
+                          use_rerank=args.rerank),
                chars=args.chars)
 
 

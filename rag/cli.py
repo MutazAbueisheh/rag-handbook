@@ -46,8 +46,10 @@ def main() -> None:
     parser.add_argument("--mode", choices=("vector", "hybrid"), default=config.RETRIEVAL_MODE, help="retrieval mode")
     parser.add_argument("--rewrite", action=argparse.BooleanOptionalAction, default=config.QUERY_REWRITE,
                         help="LLM query rewriting before search")
+    parser.add_argument("--rerank", action=argparse.BooleanOptionalAction, default=config.RERANK,
+                        help="LLM re-orders the top candidates")
     args = parser.parse_args()
-    config.RETRIEVAL_MODE, config.QUERY_REWRITE = args.mode, args.rewrite
+    config.RETRIEVAL_MODE, config.QUERY_REWRITE, config.RERANK = args.mode, args.rewrite, args.rerank
     debug, k, section = args.debug, args.k, args.section
 
     print(f"GitLab handbook Q&A  ·  {args.llm}/{config.LLM_MODELS[args.llm]}")

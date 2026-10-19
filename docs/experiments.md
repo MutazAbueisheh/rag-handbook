@@ -404,6 +404,79 @@ working days. And the extra call varies run to run.
 | p9 filling in for a manager | Explains the interim bonus but leaves out the amount (greater of $1,000 or 10% of salary) |
 | h4 leaving: options and laptop | Leaves out "IT Ops wipes the laptop" |
 
+### 10.7 Experiment: an LLM reranker
+
+**Idea.** Search compares the question with each chunk separately and cheaply. A reranker reads the
+question and about 20 candidate chunks *together*, so it can tell "how many vacation days can I take"
+apart from "how do I request vacation days". It is too slow to run on every chunk, so it only re-orders
+the candidates that hybrid search already found. Implemented as one listwise DeepSeek call
+(`rerank()` in [rag/retrieve.py](../rag/retrieve.py), flag `--rerank`): the model sees 20 numbered
+passages and replies with the numbers of the best ones, most useful first. Anything it does not pick keeps
+its original order.
+
+**Result** (31 answerable questions, chunk level, three runs each because LLM steps can vary):
+
+| Config | hit@1 | hit@3 | hit@6 | MRR |
+|---|---|---|---|---|
+| hybrid | 0.61 | 0.87 | 0.90 | 0.73 |
+| **hybrid + rerank** (mean of 3) | **0.81** | 0.92 | 0.94 | **0.87** |
+| **hybrid + rewrite + rerank** (mean of 3) | **0.85** | **0.96** | **0.97** | **0.90** |
+
+**Findings**
+- **The reranker is stable.** Hybrid + rerank gave almost identical numbers in all three runs
+  (hit@1 0.81 each time), unlike rewriting alone (section 10.5). Judging a handful of passages that are
+  already on the table is a much easier and more repeatable task than inventing search queries.
+- **It targets the weakness it was built for.** hit@1 went from 0.61 to 0.81: the best chunk is now first
+  in four questions out of five.
+- **Rewriting and reranking cover for each other.** Rewriting widens what search finds (including the
+  vacation-vs-PTO case, m1); reranking then picks the right chunk out of that wider set. Together they
+  fixed m1 (rank 1 in all three runs) for the first time. Reranking alone cannot rescue a chunk that never
+  reached the 20 candidates, and rewriting alone was not reliable enough.
+- **Specific questions moved** (rank under hybrid, then hybrid + rerank): p4 3 to 1, p6 3 to 1, e3 4 to 2,
+  m2 3 to 1, h4 8 to 2.
+
+### 10.8 Does better ranking give better answers? (end-to-end, 33 questions)
+
+DeepSeek answered and DeepSeek judged, as in section 10.6:
+
+| Retrieval | Correct | Partial | Wrong | hit@1 | MRR |
+|---|---|---|---|---|---|
+| vector | 28 | 3 | 2 | 0.61 | 0.71 |
+| hybrid | 30 | 3 | 0 | 0.61 | 0.73 |
+| hybrid + rerank | 28 | 5 | 0 | 0.81 | 0.87 |
+| hybrid + rewrite + rerank | 30 | 3 | 0 | 0.85 | 0.90 |
+
+**Finding: the retrieval gains did not show up as better answers.** Ranking improved a lot (hit@1 0.61 to
+0.85) while the answer grades stayed at 30 correct and 0 wrong. Reading the judge's reasons explains why:
+
+- **Nothing is wrong any more.** The two WRONG answers of the vector run (p4 and p6) were fixed by hybrid
+  search, and no later change broke them again.
+- **The remaining "partial" grades are about completeness, not retrieval.** For example m3 ("GitLab
+  contributes 4%", but the employee's 5% minimum is not mentioned), e2 ("$10,000 a year", but not "through
+  Navan"), p9 (the bonus exists but the formula is left out). The right chunk was usually in the prompt;
+  the model answered the question asked and did not recite every detail. The judge counts that as partial.
+- **A difference of two partial grades on 33 questions is noise.** The 28 versus 30 correct between
+  "hybrid + rerank" and "hybrid" came from different questions each time (m1 and p5 and p8 in one run,
+  e2 and p7 in another), which is what random variation looks like. We should not read it as "reranking
+  hurts".
+- **The small eval has reached its ceiling.** With 93 pages and a strong answer model, a good answer was
+  almost always reachable already. Reranking should matter more when 30 times as many chunks compete
+  (section 12), which this index cannot show.
+
+**What this means for cost.** Reranking adds one DeepSeek call per question (about 10k input tokens), and
+rewriting adds another. Across every experiment in this project, including three-run variance tests, the
+DeepSeek spend was about $0.46 of the $2.00 top-up, so cost is not a problem. The reasons to leave them
+off by default are different: they need the network and a key, and they add 2 to 6 seconds per question.
+
+**Decisions**
+- **Keep `hybrid` as the default** (offline, free, deterministic), with `RERANK = False` and
+  `QUERY_REWRITE = False`.
+- **Recommended profile for the best retrieval: `--rewrite --rerank`.** It is the best on every retrieval
+  metric, it is the only configuration that finds the global Flexible PTO chunk (m1), and the reranker is
+  stable from run to run.
+- **Re-test on the full index before changing the default.** If the gap between "hybrid" and
+  "hybrid + rewrite + rerank" widens with 48k chunks, as expected, make the second one the default.
+
 ## 11. Decision log
 
 | # | Decision | Reason | Evidence |
@@ -428,18 +501,22 @@ working days. And the extra call varies run to run.
 | 18 | BM25 from scratch + hybrid with RRF | Embeddings blur exact terms | End-to-end 28 to 30 correct |
 | 19 | `RRF_K = 10` | Top ranks should count more | K sweep (section 10.4) |
 | 20 | Rewriting opt-in, hybrid default | Unstable and API-dependent | Three-run variance (section 10.5) |
+| 21 | Add an LLM reranker (listwise, top 20 candidates, one DeepSeek call) | Best chunk was first only 61% of the time | hit@1 0.61 to 0.81, stable over 3 runs (section 10.7) |
+| 22 | Use rewrite and rerank together when the best retrieval is wanted | Each covers the other's weakness; only the pair fixes m1 | hit@6 0.97, MRR 0.90 (section 10.7) |
+| 23 | Keep `hybrid` as the default; rewrite and rerank stay opt-in | Offline, free, deterministic; end-to-end answers did not improve on this small set | 30/33 correct for both (section 10.8) |
 
 ## 12. Open items
 
-1. **A reranker.** Re-score the top ~20 chunks against the question. Targets m1 and the fact that the
-   best chunk is first only about 60% of the time (hit@1 = 0.61).
-2. **Index the whole handbook** (about 5 to 9 h on CPU), then rerun the eval. Expect scores to drop,
+Step 10 is complete as far as the small index can measure. What is left needs the full index or more time:
+
+
+1. **Index the whole handbook** (the main open item: the current eval cannot tell the configurations apart end to end) (about 5 to 9 h on CPU), then rerun the eval. Expect scores to drop,
    since 30 times more chunks compete, and add questions from the other sections.
-3. **Chunk-size experiments.** Each needs a ~14 min re-embed on the small index.
-4. **Tiny chunks:** merge or leave, to be decided by the eval.
-5. **Eval hygiene:** run rewrite comparisons several times, and re-label questions after seeing what
+2. **Chunk-size experiments.** Each needs a ~14 min re-embed on the small index.
+3. **Tiny chunks:** merge or leave, to be decided by the eval.
+4. **Eval hygiene:** run rewrite comparisons several times, and re-label questions after seeing what
    actually failed (m1 was labelled medium but is the hardest retrieval case).
-6. **A Streamlit UI.**
+5. **A Streamlit UI.**
 
 **Where the numbers come from:** `.venv/bin/python -m rag.evaluate [--mode hybrid] [--rewrite] [--answers
 --llm deepseek --judge]`. Saved runs are in `eval/results/`.

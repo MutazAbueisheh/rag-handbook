@@ -35,6 +35,9 @@ TOP_K = 6
 # Step 10 results (31 eval questions, chunk hit@6): vector 0.87, hybrid 0.90, hybrid+rewrite 0.94-0.97.
 RETRIEVAL_MODE = "hybrid"      # "vector" (embeddings only) or "hybrid" (embeddings + BM25 keywords)
 QUERY_REWRITE = False          # LLM rewrites the question into extra search queries (best, but needs the API)
+RERANK = False                 # an LLM re-orders the top candidates by reading them with the question
+RERANK_CANDIDATES = 20         # how many fused candidates the reranker sees
+RERANK_LLM = "deepseek"
 REWRITE_N = 3                  # how many extra queries
 REWRITE_LLM = "deepseek"       # which provider rewrites (see LLM_MODELS below)
 FUSION_CANDIDATES = 30         # in hybrid/rewrite modes, how deep each ranked list goes before merging

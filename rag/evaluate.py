@@ -119,12 +119,14 @@ def main() -> None:
     parser.add_argument("--mode", choices=("vector", "hybrid"), default=config.RETRIEVAL_MODE)
     parser.add_argument("--rewrite", action=argparse.BooleanOptionalAction, default=config.QUERY_REWRITE,
                         help="LLM query rewriting before search")
+    parser.add_argument("--rerank", action=argparse.BooleanOptionalAction, default=config.RERANK,
+                        help="LLM re-orders the top candidates")
     parser.add_argument("--answers", action="store_true", help="also generate answers and check keywords")
     parser.add_argument("--llm", choices=PROVIDERS, default=config.LLM_PROVIDER, help="which LLM answers")
     parser.add_argument("--judge", action="store_true", help="grade answers with DeepSeek (needs --answers)")
     args = parser.parse_args()
     # Set the retrieval options globally, so every retrieve() call in this run uses them.
-    config.RETRIEVAL_MODE, config.QUERY_REWRITE = args.mode, args.rewrite
+    config.RETRIEVAL_MODE, config.QUERY_REWRITE, config.RERANK = args.mode, args.rewrite, args.rerank
 
     questions = yaml.safe_load(QUESTIONS_FILE.read_text())
     if args.level:
@@ -188,10 +190,10 @@ def main() -> None:
 
     # --- Save the run, with the settings that produced it
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    tag = f"{args.mode}{'+rewrite' if args.rewrite else ''}" + (f"-{args.llm}" if args.answers else "")
+    tag = f"{args.mode}{'+rewrite' if args.rewrite else ''}{'+rerank' if args.rerank else ''}" + (f"-{args.llm}" if args.answers else "")
     out = RESULTS_DIR / f"{datetime.now():%Y%m%d-%H%M%S}-{tag}.json"
     settings = {k: getattr(config, k) for k in ("CHUNK_SPLIT_LEVEL", "CHUNK_MAX_TOKENS", "CHUNK_OVERLAP_TOKENS",
-                                                 "EMBED_MODEL", "TOP_K", "RETRIEVAL_MODE", "QUERY_REWRITE")}
+                                                 "EMBED_MODEL", "TOP_K", "RETRIEVAL_MODE", "QUERY_REWRITE", "RERANK")}
     if args.answers:
         settings["LLM"] = f"{args.llm}/{config.LLM_MODELS[args.llm]}"
     out.write_text(json.dumps({"settings": settings, "summary": summary, "rows": rows}, indent=2))

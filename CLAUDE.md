@@ -47,9 +47,11 @@ Pin dependency versions in `pyproject.toml`.
 9. [x] Eval (`rag/evaluate.py`): 23 hand-written Q/A pairs (easy/medium/hard) in `eval/questions.yaml`;
    measures hit@k and MRR (chunk and page level), and with `--answers` checks LLM answers by keyword.
    Runs are saved to `eval/results/` for comparison.
-10. [ ] Iterate. Round 1 done: added 10 "everyday"-phrased eval questions, an LLM judge (`--judge`),
-   BM25 from scratch (`rag/bm25.py`), hybrid search with RRF, and LLM query rewriting (`--rewrite`).
-   Defaults now hybrid + RRF_K=10. Still open: reranker, chunk sizes, full-handbook index, Streamlit UI.
+10. [x] Iterate (details and evidence in `docs/experiments.md`). Added: 10 "everyday"-phrased eval questions,
+   an LLM judge (`--judge`), BM25 from scratch (`rag/bm25.py`), hybrid search with RRF (K=10, default),
+   LLM query rewriting (`--rewrite`) and an LLM reranker (`--rerank`). Best retrieval = `--rewrite --rerank`
+   (hit@1 0.85, MRR 0.90 vs 0.61 / 0.73 for hybrid alone). Not done: index the whole handbook (~5-9 h) and
+   re-run the eval, chunk-size experiments, merging tiny chunks, Streamlit UI.
 
 Update the checkboxes as steps finish.
 
@@ -67,5 +69,8 @@ Update the checkboxes as steps finish.
 - Step 10 end-to-end (33 questions, deepseek-flash answers, DeepSeek judge, correct/partial/wrong):
   vector 28/3/2, hybrid 30/3/0 (best, now default), hybrid+rewrite 28/3/2 (that run's rewrites lost p4).
   Remaining partials: m1 (Flexible PTO chunk still not retrieved), h4, p9 (interim bonus amount missed).
+- Step 10 reranking (retrieval only, 3 runs each): hybrid hit@1 0.61 / MRR 0.73; +rerank 0.81 / 0.87;
+  +rewrite+rerank 0.85 / 0.90 and the only config that finds m1. End-to-end answers stayed at 30/33 correct
+  (small eval is at its ceiling). All DeepSeek experiments together cost about $0.46.
 - LLM speed (qwen2.5:3b on CPU): reads ~30 prompt tokens/s, so a 6-chunk prompt (~2k tokens) takes ~60-80 s per answer.
 - Load the `claude-api` skill before writing the Anthropic SDK code (if switching generation to Claude).
