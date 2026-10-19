@@ -24,7 +24,7 @@ Full plan, with the reasons behind each design option:
 
 From scratch (no LlamaIndex/LangChain) · Python 3.12.2 venv in `.venv` · Ollama
 `nomic-embed-text` (768-dim) for embeddings · Chroma persisted to `chroma_db/` ·
-Claude (`claude-haiku-5-5`, with `claude-sonnet-5-5` as an option) for answers · CLI first, Streamlit later.
+answers from Ollama `qwen2.5:3b` (local, offline) or the DeepSeek API `deepseek-flash` (switch with `--llm` or `config.LLM_PROVIDER`) · CLI first, Streamlit later.
 
 All settings live in `rag/config.py`. Run code with `.venv/bin/python -m rag.<module>`.
 Pin dependency versions in `pyproject.toml`.
@@ -36,19 +36,36 @@ Pin dependency versions in `pyproject.toml`.
    (`path`, `url`, `title`, `description`, `section`), and print corpus stats.
    Start with the sections in `config.DEFAULT_SECTIONS`.
 3. [x] Clean (`rag/clean.py`): shortcodes as above, plus stripping HTML to text.
-4. [ ] Chunk (`rag/chunk.py`): split on `##`/`###` headings and cap at ~500 tokens with ~50 overlap.
+4. [x] Chunk (`rag/chunk.py`): split on `##`/`###` headings and cap at ~500 tokens with ~50 overlap.
    Prefix each chunk with `title > heading path` and store the heading anchor for deep links.
-5. [ ] Embed + store (`rag/index.py`): batch-embed with Ollama and upsert into Chroma.
-6. [ ] Retrieve: embed the query, take the top-k, and allow an optional filter by section.
-7. [ ] Generate (`rag/query.py`): answer only from the retrieved context, cite URLs,
-   and reply "not in the handbook" otherwise. Needs `ANTHROPIC_API_KEY`, which is **not set yet**.
-8. [ ] CLI REPL with a `--debug` flag that shows the retrieved chunks and their scores.
-9. [ ] Eval: 20–30 hand-written Q/A pairs in `eval/questions.yaml`, then measure hit@k and MRR.
-10. [ ] Iterate: chunk sizes, hybrid BM25 + vector search, a reranker, query rewriting. Optionally a Streamlit UI.
+5. [x] Embed + store (`rag/index.py`): batch-embed with Ollama and upsert into Chroma.
+6. [x] Retrieve (`rag/retrieve.py`): embed the query, take the top-k, and allow an optional filter by section.
+7. [x] Generate (`rag/query.py`): answer only from the retrieved context, cite sources by number
+   (mapped to URLs in code), and reply "Not in the handbook." otherwise. Uses local Ollama `qwen2.5:3b`.
+   Prompt layout was tuned by testing; see the comment above `SYSTEM_PROMPT`.
+8. [x] CLI REPL (`rag/cli.py`) with a `--debug` flag that shows the retrieved chunks and their scores.
+9. [x] Eval (`rag/evaluate.py`): 23 hand-written Q/A pairs (easy/medium/hard) in `eval/questions.yaml`;
+   measures hit@k and MRR (chunk and page level), and with `--answers` checks LLM answers by keyword.
+   Runs are saved to `eval/results/` for comparison.
+10. [ ] Iterate. Round 1 done: added 10 "everyday"-phrased eval questions, an LLM judge (`--judge`),
+   BM25 from scratch (`rag/bm25.py`), hybrid search with RRF, and LLM query rewriting (`--rewrite`).
+   Defaults now hybrid + RRF_K=10. Still open: reranker, chunk sizes, full-handbook index, Streamlit UI.
 
 Update the checkboxes as steps finish.
 
 ## Notes
 
-- Embedding speed measured at setup: a batch of 32 short texts took ~1.6 s on this machine.
-- Load the `claude-api` skill before writing the Anthropic SDK code.
+- Embedding speed (CPU only, no GPU): ~275-550 tokens/s on real chunks. Default sections (1,574 chunks) took ~14 min; the whole handbook (~48k chunks, ~9M tokens) would take ~5-9 h. `rag.index` is a resumable sync, so it can run overnight.
+- DeepSeek: key is `DEEPSEEK_API_KEY` in `~/.bashrc`. Non-interactive shells don't load it; use
+  `eval "$(grep DEEPSEEK_API_KEY ~/.bashrc)"` before running. `deepseek-flash` = DeepSeek-V4.1-Flash
+  (check `GET https://api.deepseek.com/models`); ~2-5 s per answer; full eval ~75 s.
+- Eval baseline (23 questions, my manual review): qwen2.5:3b 15/23 correct; deepseek-flash 22/23
+  (m1 "vacation cap" still fails because retrieval misses the global Flexible PTO chunk).
+- Step 10 retrieval (31 answerable questions, chunk hit@6 / MRR): vector 0.87/0.71, hybrid(k=10) 0.90/0.73,
+  hybrid+rewrite 0.94-0.97/0.68-0.75 over 3 runs. Rewrites vary run to run even at temperature 0, so
+  compare rewrite configs over several runs. Sweep script idea: cache rewrites so configs share them.
+- Step 10 end-to-end (33 questions, deepseek-flash answers, DeepSeek judge, correct/partial/wrong):
+  vector 28/3/2, hybrid 30/3/0 (best, now default), hybrid+rewrite 28/3/2 (that run's rewrites lost p4).
+  Remaining partials: m1 (Flexible PTO chunk still not retrieved), h4, p9 (interim bonus amount missed).
+- LLM speed (qwen2.5:3b on CPU): reads ~30 prompt tokens/s, so a 6-chunk prompt (~2k tokens) takes ~60-80 s per answer.
+- Load the `claude-api` skill before writing the Anthropic SDK code (if switching generation to Claude).

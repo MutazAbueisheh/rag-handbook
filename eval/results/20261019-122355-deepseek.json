@@ -1,0 +1,300 @@
+{
+  "settings": {
+    "CHUNK_SPLIT_LEVEL": 3,
+    "CHUNK_MAX_TOKENS": 500,
+    "CHUNK_OVERLAP_TOKENS": 50,
+    "EMBED_MODEL": "nomic-embed-text",
+    "TOP_K": 6,
+    "LLM": "deepseek/deepseek-flash"
+  },
+  "summary": {
+    "easy/chunk": {
+      "hit@1": 0.6666666666666666,
+      "hit@3": 1.0,
+      "hit@6": 1.0,
+      "hit@10": 1.0,
+      "MRR": 0.8055555555555555
+    },
+    "easy/page": {
+      "hit@1": 1.0,
+      "hit@3": 1.0,
+      "hit@6": 1.0,
+      "hit@10": 1.0,
+      "MRR": 1.0
+    },
+    "medium/chunk": {
+      "hit@1": 0.6666666666666666,
+      "hit@3": 0.7777777777777778,
+      "hit@6": 0.8888888888888888,
+      "hit@10": 0.8888888888888888,
+      "MRR": 0.7222222222222222
+    },
+    "medium/page": {
+      "hit@1": 0.8888888888888888,
+      "hit@3": 0.8888888888888888,
+      "hit@6": 1.0,
+      "hit@10": 1.0,
+      "MRR": 0.9166666666666666
+    },
+    "hard/chunk": {
+      "hit@1": 0.6666666666666666,
+      "hit@3": 0.8333333333333334,
+      "hit@6": 1.0,
+      "hit@10": 1.0,
+      "MRR": 0.7555555555555555
+    },
+    "hard/page": {
+      "hit@1": 0.6666666666666666,
+      "hit@3": 1.0,
+      "hit@6": 1.0,
+      "hit@10": 1.0,
+      "MRR": 0.8055555555555555
+    },
+    "all/chunk": {
+      "hit@1": 0.6666666666666666,
+      "hit@3": 0.8571428571428571,
+      "hit@6": 0.9523809523809523,
+      "hit@10": 0.9523809523809523,
+      "MRR": 0.7555555555555555
+    },
+    "all/page": {
+      "hit@1": 0.8571428571428571,
+      "hit@3": 0.9523809523809523,
+      "hit@6": 1.0,
+      "hit@10": 1.0,
+      "MRR": 0.9087301587301587
+    },
+    "easy/answers": 1.0,
+    "medium/answers": 1.0,
+    "hard/answers": 0.875,
+    "all/answers": 0.9565217391304348
+  },
+  "rows": [
+    {
+      "id": "e1",
+      "level": "easy",
+      "question": "What does CREDIT stand for?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "According to source [1], GitLab\u2019s six core values are **Collaboration**, **Results for Customers**, **Efficiency**, **Diversity, Inclusion & Belonging**, **Iteration**, and **Transparency**, and together they spell **CREDIT** [1].",
+      "correct": true,
+      "seconds": 3
+    },
+    {
+      "id": "e2",
+      "level": "easy",
+      "question": "How much money can I get reimbursed per year for growth and development?",
+      "rank": 2,
+      "page_rank": 1,
+      "answer": "You can be reimbursed up to $10,000 per calendar year for eligible growth experiences, provided you meet all eligibility requirements [2]. If an opportunity spans more than one year, costs can be distributed across multiple years, but you still cannot exceed $10,000 expensed per year [1].",
+      "correct": true,
+      "seconds": 2
+    },
+    {
+      "id": "e3",
+      "level": "easy",
+      "question": "How long do I have to exercise my vested stock options after leaving GitLab?",
+      "rank": 3,
+      "page_rank": 1,
+      "answer": "After leaving GitLab, you have **90 days post-termination** to exercise your vested options [3], which is also described as a **three-month window** [5]. Unvested RSUs and options are forfeited on your exit date [3]. Separately, stock options generally expire **10 years after they were issued** if not otherwise expired through termination of employment [1].",
+      "correct": true,
+      "seconds": 2
+    },
+    {
+      "id": "e4",
+      "level": "easy",
+      "question": "Can I wipe my own laptop on my last day?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "No. It is required that your laptop is wiped on your last day, and you should book an appointment with an IT Ops team member for that day [1]. Under **no circumstance** should you wipe your own laptop; laptop wipes must be done by an IT Ops team member for logs [1]. You can contact IT via the Compass app in Slack or at it-help@gitlab.com [1].",
+      "correct": true,
+      "seconds": 2
+    },
+    {
+      "id": "e5",
+      "level": "easy",
+      "question": "What is the first thing an onboarding buddy should do?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "The first and most important thing an onboarding buddy should do is schedule a call with the new GitLab team-member [1]. To do this, the buddy can ask the new starter\u2019s manager for their personal email address before their start date, introduce themselves, and ask when a good time for an initial coffee chat would be, possibly toward the end of their first day [1].",
+      "correct": true,
+      "seconds": 2
+    },
+    {
+      "id": "e6",
+      "level": "easy",
+      "question": "How quickly does People Operations respond to an employment verification request?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "People Operations lists Employment Verification with a response timeline of within 24 hours [1].",
+      "correct": true,
+      "seconds": 2
+    },
+    {
+      "id": "m1",
+      "level": "medium",
+      "question": "Is there a cap on how many vacation days I can take?",
+      "rank": null,
+      "page_rank": 4,
+      "answer": "The sources do not state a single global cap on how many vacation days a team member can take; instead, they describe country-specific statutory vacation entitlements. In the Netherlands, the policy states a minimum of 20 vacation days annually, accruing at 1.67 days per month, with unused days carrying over but expiring July 1 [1]. In Korea, statutory vacation increases with service and is capped at up to 25 days per year for team members with 3+ years of service [3]. In Singapore, annual leave increases with tenure up to 14 days per year at 8 years of service, and unused leave can be carried over up to the statutory accrual limit [5]. In Ireland, the policy states 4 weeks of vacation leave annually, and unused days cannot be carried over without written approval [6]. Brazil states that after the full statutory leave allowance is exhausted, ongoing time off will be Flex Time Off per GitLab policy [2]. So any cap depends on the local statutory vacation policy rather than a single global limit.",
+      "correct": true,
+      "seconds": 8
+    },
+    {
+      "id": "m2",
+      "level": "medium",
+      "question": "Will GitLab sponsor my H-1B visa?",
+      "rank": 6,
+      "page_rank": 1,
+      "answer": "GitLab does not offer any form of work or study sponsorship anywhere in the world, except for its specific internal Netherlands process and support for highly skilled candidates in certain countries where the candidate is already based [6]. GitLab also does not support any visa that requires sponsorship, including visas that require GitLab to petition the government, fill out an application on a team member\u2019s behalf, pay an employer fee, or take on a significant compliance burden [1]. The handbook\u2019s list of visas GitLab may be able to accept does not include the H-1B, though that list is described as not exhaustive [3]. Based on these sources, GitLab will not sponsor an H-1B visa.",
+      "correct": true,
+      "seconds": 4
+    },
+    {
+      "id": "m3",
+      "level": "medium",
+      "question": "How much does GitLab put into my pension in the UK?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "GitLab contributes 4% of your basic salary to the UK pension scheme [1][6]. Your own minimum contribution is 5% of your basic salary [1]. The pension contribution percentages are based on basic salary only and do not include commission, bonuses, or overtime payments [6].",
+      "correct": true,
+      "seconds": 2
+    },
+    {
+      "id": "m4",
+      "level": "medium",
+      "question": "Does GitLab match my 401(k) contributions?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "Yes. For the US 401(k) plan, GitLab provides a company match of 50% of contributions on the first 6% of earnings, up to $1,500 annually [1].",
+      "correct": true,
+      "seconds": 2
+    },
+    {
+      "id": "m5",
+      "level": "medium",
+      "question": "Who needs to approve a $5,000 conference from my growth and development budget?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "A $5,000 conference request falls within the $1,000.01\u2013$10,000 approval tier, so it requires both manager and VP approval [1]. Conference registration fees are eligible for G&D reimbursement [2], and all G&D applications require manager approval [5].",
+      "correct": true,
+      "seconds": 2
+    },
+    {
+      "id": "m6",
+      "level": "medium",
+      "question": "Can I use a 360 review to manage someone's poor performance?",
+      "rank": 3,
+      "page_rank": 1,
+      "answer": "No. The 360 process is meant to support a team member\u2019s development and growth, and 360s should not be used as performance management tools [3]. A 360 should not replace regular, ongoing feedback or serve as the core data point [3]. If unsatisfactory performance is identified, managers should address it timely and honestly and should not wait for the 360 process to address performance matters [6]. The 360 feedback may help in talking through examples of strengths or improvement areas, but it should not be the only data point used in evaluating performance [6].",
+      "correct": true,
+      "seconds": 3
+    },
+    {
+      "id": "m7",
+      "level": "medium",
+      "question": "How long can I work from another country without changing my official location?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "You can work from another country for a maximum of **183 days (about six months) per calendar year** without completing a long-term relocation request, provided you still reside in your primary location for at least 183 days per year [1][3]. Time spent in temporary locations for 183 days or less is considered a short-term relocation and does not change your compensation or employment agreement [1]. Working in a new location for more than 183 days qualifies as a long-term relocation, and your compensation and employment agreement will be updated for the new location [1]. If you believe you may exceed\u2014or have already exceeded\u2014the 183-day limit, you should contact the People Operations Team immediately [3].",
+      "correct": true,
+      "seconds": 4
+    },
+    {
+      "id": "m8",
+      "level": "medium",
+      "question": "Do engineers in Australia get anything extra for being on call?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "Yes\u2014engineers based in Australia who are in the Development and Infrastructure departments and participate in on-call rotations outside normal working hours are eligible for time in lieu after on-call shifts [1]. The compensation is a half day of time in lieu for a 4-hour shift, 1 day for an 8-hour shift, and 3 days for a 24-hour shift [1]. The full shift/state of readiness is compensated, not only the \u201cactual time worked\u201d [1]. Time in lieu must be taken within 2 weeks of completing the on-call shift [1][3], and it is requested through Workday by selecting \u201cTime Off in Lieu\u201d under the Time Offs dropdown menu [1][3]. Only on-call shifts outside working hours\u2014such as weekends or evenings\u2014result in time in lieu [3].",
+      "correct": true,
+      "seconds": 4
+    },
+    {
+      "id": "m9",
+      "level": "medium",
+      "question": "Who should I contact if I experience discrimination at work?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "If you believe you have been discriminated against or have witnessed discriminatory practices, contact the Chief People Officer, a People Business Partner, or the Team Member Relations Specialist to initiate an investigation into the behavior [1]. GitLab has also engaged Lighthouse Services to provide anonymous reporting methods, as described in the \u201cHow to Report Violations\u201d section [1]. In the UK-specific complaint procedure, an employee who does not wish to address the harasser directly, or whose situation is not resolved, should report the misconduct to their line manager or a member of the People Business Partner, and may be accompanied by a colleague or union representative if they wish [2].",
+      "correct": true,
+      "seconds": 3
+    },
+    {
+      "id": "h1",
+      "level": "hard",
+      "question": "How long is parental leave in New Zealand, and how much of it is paid?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "In New Zealand, eligible team members who become a \u201cPrimary Carer\u201d can receive government-funded parental leave pay, and Primary Carer Leave can last up to 26 weeks and must be taken in one continuous period [1]. Team members employed for at least six months but less than twelve months are entitled to up to a total of 26 weeks of unpaid extended parental leave, less any Primary Carer Leave taken [1]. Team members employed for at least twelve months are entitled to up to 52 weeks of unpaid extended leave, less Primary Carer Leave, with a maximum of 26 weeks deducted [1]. Partner Leave is one week unpaid for eligible partners employed at least six months but less than twelve months, and two weeks unpaid for eligible partners employed at least twelve months [2]. Partner Leave runs concurrently with GitLab Parental Leave and provides up to 100% of regular salary for up to 16 weeks [2]. If eligible, GitLab will supplement the government-funded payment so the team member receives 100% pay for up to 16 weeks of Parental Leave [2]. Team members who are pregnant can also take up to 10 days of unpaid special leave for pregnancy-related reasons, in addition to Primary Carer Leave [1].",
+      "correct": true,
+      "seconds": 5
+    },
+    {
+      "id": "h2",
+      "level": "hard",
+      "question": "If 100 of my RSUs vest and my tax rate is 30%, how many shares do I keep?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "If 100 RSUs vest and your tax rate is 30%, 30 shares are sold automatically to cover the taxes due [1]. The remaining shares are deposited into your E*TRADE account, so you keep 70 shares [1].",
+      "correct": true,
+      "seconds": 2
+    },
+    {
+      "id": "h3",
+      "level": "hard",
+      "question": "Compare what GitLab contributes to retirement savings in the UK and in the US.",
+      "rank": 3,
+      "page_rank": 3,
+      "answer": "In the US, GitLab offers a 401(k) plan with a company match of 50% of contributions on the first 6% of earnings, up to $1,500 annually [1]. The US plan also states immediate eligibility and vesting [1]. In the UK, GitLab provides a Group Personal Pension Plan with Scottish Widows and contributes 4% of basic salary [3]. UK employees must contribute at least 5% of basic salary [3]. So the US contribution is a capped matching formula, while the UK contribution is a fixed 4% of basic salary from GitLab [1][3].",
+      "correct": true,
+      "seconds": 4
+    },
+    {
+      "id": "h4",
+      "level": "hard",
+      "question": "I'm leaving GitLab. What happens to my stock options, and what do I do with my laptop?",
+      "rank": 5,
+      "page_rank": 2,
+      "answer": "When you leave GitLab, you generally can exercise options that were vested as of your last day of service [1]. The handbook also says you have 90 days post-termination to exercise vested options, and unvested RSUs and options are forfeited on your exit date [3]. Unless your options expire earlier through termination of employment, they expire 10 years after they were issued [1]. For more detail, the offboarding FAQ points to the Stock Options handbook page\u2019s \u201cExercise Window after Termination\u201d section [2].\n\nFor your laptop, any GitLab property valued above 1,000 USD must be returned [5]. Under the Laptop Buyback Policy, team members may\u2014at GitLab\u2019s discretion\u2014have the option to keep or buy back their existing laptops when refreshed or offboarding, but that option may be voided in cases such as investigation, misconduct, termination for cause, Code of Business Conduct & Ethics violations, or other legal/security inquiries [5]. To return your laptop, contact `gitlab-laptop-recovery@gitlab.com` immediately upon offboarding [5]. If you are returning your laptop to IT, purchase a cardboard box and packing foam before your last day and expense it in Navan under \u201cOffice supplies & consumables\u201d; IT will send a prepaid shipping label [6]. You should also refer to the Laptop Buy Back Policy [6].",
+      "correct": true,
+      "seconds": 5
+    },
+    {
+      "id": "h5",
+      "level": "hard",
+      "question": "What does MVC mean in GitLab's values?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "MVC stands for **Minimal Valuable Change** [1]. GitLab encourages MVCs to be as small as possible [1]. It says to always look for the quickest change possible to improve the user\u2019s outcome [1]. An MVC may be additive or subtractive [1]. There is no need to wait for something more robust [1]. This applies to everything GitLab does in all functions [1]. Specifically for product MVCs, there is an additional responsibility to validate with customers that useful functionality is being added without obvious bugs or usability issues [1].",
+      "correct": true,
+      "seconds": 3
+    },
+    {
+      "id": "h6",
+      "level": "hard",
+      "question": "How much can team members in Mexico get reimbursed for an ergonomic chair?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "Team members in Mexico can receive a one-time reimbursement of 3,000 MXN for an ergonomic chair [1].",
+      "correct": true,
+      "seconds": 1
+    },
+    {
+      "id": "h7",
+      "level": "hard",
+      "question": "What is the probation period in Germany?",
+      "answer": "The sources do not state the specific probation period for Germany. They say that probation periods are location-dependent and range between 1 and 9 months [1], and that common practice is for contracts in each country to have the maximum allowable probationary period [1]. Because the location table is not included in the provided sources, the exact German probation period cannot be determined from them.",
+      "correct": false,
+      "seconds": 3
+    },
+    {
+      "id": "h8",
+      "level": "hard",
+      "question": "What is the daily per diem when I travel for work?",
+      "answer": "Not in the handbook.",
+      "correct": true,
+      "seconds": 2
+    }
+  ]
+}
