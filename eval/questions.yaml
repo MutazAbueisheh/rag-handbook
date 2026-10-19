@@ -1,0 +1,293 @@
+# Hand-written eval set for the RAG (step 9). Every answer was checked against the source file.
+#
+# Fields:
+#   id, level     easy | medium | hard
+#   question      what a user would type
+#   answer        the expected answer, for humans reading the results
+#   sources       facts the answer needs. Each fact is a list of acceptable chunk URLs
+#                 (a fact can live in more than one chunk). A question counts as retrieved
+#                 at rank r when ALL its facts appear in the top r.
+#   keywords      words that must all appear in a correct generated answer (case-insensitive)
+#   not_found     true when the indexed handbook does not contain the answer;
+#                 the correct reply is "Not in the handbook."
+#
+# Levels:
+#   easy    one fact, wording close to the handbook
+#   medium  paraphrased wording, or the fact is one item in a list or table
+#   hard    two facts / two pages, a calculation, a trap, or nothing to find
+
+- id: e1
+  level: easy
+  question: What does CREDIT stand for?
+  answer: Collaboration, Results for Customers, Efficiency, Diversity Inclusion & Belonging, Iteration, Transparency.
+  sources:
+    - [https://handbook.gitlab.com/handbook/values/#credit]
+  keywords: [collaboration, results, efficiency, iteration, transparency]
+
+- id: e2
+  level: easy
+  question: How much money can I get reimbursed per year for growth and development?
+  answer: Up to $10,000 per calendar year, reimbursed through Navan.
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/learning-and-development/growth-and-development/]
+  keywords: ["10,000"]
+
+- id: e3
+  level: easy
+  question: How long do I have to exercise my vested stock options after leaving GitLab?
+  answer: 90 days after termination. Unvested RSUs and options are forfeited on the exit date.
+  sources:
+    - [https://handbook.gitlab.com/handbook/total-rewards/stock-options/#about-your-ownership-in-gitlab]
+  keywords: ["90 days"]
+
+- id: e4
+  level: easy
+  question: Can I wipe my own laptop on my last day?
+  answer: No. The laptop must be wiped on your last day, but only by an IT Ops team member (for logs); book an appointment.
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/offboarding/faq/#laptop-wipe]
+  keywords: ["IT"]
+
+- id: e5
+  level: easy
+  question: What is the first thing an onboarding buddy should do?
+  answer: Schedule a call with the new team member, ideally in the days before they start.
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/general-onboarding/onboarding-buddies/#buddy-responsibilities]
+  keywords: [call]
+
+- id: e6
+  level: easy
+  question: How quickly does People Operations respond to an employment verification request?
+  answer: Within 24 hours.
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/#people-operations-team]
+  keywords: ["24 hours"]
+
+- id: m1
+  level: medium
+  question: Is there a cap on how many vacation days I can take?
+  answer: No set limit (Flexible PTO), but more than 25 consecutive calendar days needs special permission from your manager, People Business Partner and the Absence Management team.
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/time-off-and-absence/time-off-types/#overview]
+  keywords: ["25"]
+
+- id: m2
+  level: medium
+  question: Will GitLab sponsor my H-1B visa?
+  answer: No. GitLab does not sponsor visas (except its internal Netherlands process); US H-1B is listed under visas GitLab does not sponsor.
+  sources:
+    - - https://handbook.gitlab.com/handbook/people-group/visas/#visas-and-work-permits-gitlab-does-not-sponsor
+      - https://handbook.gitlab.com/handbook/people-group/visas/#visa-and-sponsorship-policy
+  keywords: [H-1B]
+
+- id: m3
+  level: medium
+  question: How much does GitLab put into my pension in the UK?
+  answer: GitLab contributes 4% of basic salary; you contribute at least 5%.
+  sources:
+    - [https://handbook.gitlab.com/handbook/total-rewards/benefits/general-and-entity-benefits/ltd-benefits-uk/#pension-scheme]
+  keywords: ["4%"]
+
+- id: m4
+  level: medium
+  question: Does GitLab match my 401(k) contributions?
+  answer: Yes, 50% of contributions on the first 6% of earnings, up to $1,500 a year.
+  sources:
+    - [https://handbook.gitlab.com/handbook/total-rewards/benefits/general-and-entity-benefits/inc-benefits-us/#401k-plan-with-company-match]
+  keywords: ["50%", "1,500"]
+
+- id: m5
+  level: medium
+  question: Who needs to approve a $5,000 conference from my growth and development budget?
+  answer: Your manager and your VP (manager + VP approval covers $1,000.01 to $10,000).
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/learning-and-development/growth-and-development/#step-3---gain-approval]
+  keywords: [VP]
+
+- id: m6
+  level: medium
+  question: Can I use a 360 review to manage someone's poor performance?
+  answer: No. 360s are for development and should not be used as performance management tools.
+  sources:
+    - - https://handbook.gitlab.com/handbook/people-group/360-feedback/#is-the-360-process-right-for-me
+      - https://handbook.gitlab.com/handbook/people-group/360-feedback/#key-principles
+  keywords: [development]
+
+- id: m7
+  level: medium
+  question: How long can I work from another country without changing my official location?
+  answer: At most 183 days per calendar year outside your primary location; you must reside there at least 183 days a year.
+  sources:
+    - - https://handbook.gitlab.com/handbook/people-group/relocation/#importance-of-communicating-location
+      - https://handbook.gitlab.com/handbook/people-group/relocation/#digital-nomads
+  keywords: ["183"]
+
+- id: m8
+  level: medium
+  question: Do engineers in Australia get anything extra for being on call?
+  answer: Yes, time in lieu after on-call shifts (for the Development and Infrastructure departments).
+  sources:
+    - [https://handbook.gitlab.com/handbook/total-rewards/benefits/general-and-entity-benefits/pty-benefits-australia/#on-call-support-engineering-only]
+  keywords: [lieu]
+
+- id: m9
+  level: medium
+  question: Who should I contact if I experience discrimination at work?
+  answer: The Chief People Officer, a People Business Partner, or the Team Member Relations Specialist.
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/anti-harassment/#discrimination]
+  keywords: [People Business Partner]
+
+- id: h1
+  level: hard
+  question: How long is parental leave in New Zealand, and how much of it is paid?
+  answer: Primary Carer Leave lasts up to 26 weeks (government-funded pay); GitLab tops this up to 100% of salary for up to 16 weeks.
+  sources:
+    - [https://handbook.gitlab.com/handbook/total-rewards/benefits/general-and-entity-benefits/pty-benefits-new-zealand/#parental-leave]
+  keywords: ["26", "16"]
+
+- id: h2
+  level: hard
+  question: If 100 of my RSUs vest and my tax rate is 30%, how many shares do I keep?
+  answer: 70. With sell-to-cover, 30 shares are sold automatically to pay the tax.
+  sources:
+    - [https://handbook.gitlab.com/handbook/total-rewards/stock-options/#sell-to-cover---rsus]
+  keywords: ["70"]
+
+- id: h3
+  level: hard
+  question: Compare what GitLab contributes to retirement savings in the UK and in the US.
+  answer: UK pension - GitLab contributes 4% of basic salary. US 401(k) - GitLab matches 50% of the first 6% of earnings, up to $1,500 a year.
+  sources:
+    - [https://handbook.gitlab.com/handbook/total-rewards/benefits/general-and-entity-benefits/ltd-benefits-uk/#pension-scheme]
+    - [https://handbook.gitlab.com/handbook/total-rewards/benefits/general-and-entity-benefits/inc-benefits-us/#401k-plan-with-company-match]
+  keywords: ["4%", "50%"]
+
+- id: h4
+  level: hard
+  question: I'm leaving GitLab. What happens to my stock options, and what do I do with my laptop?
+  answer: You have 90 days to exercise vested options (unvested ones are forfeited). The laptop is wiped by IT Ops on your last day and returned with a prepaid label (or kept/bought back, at GitLab's discretion).
+  sources:
+    - [https://handbook.gitlab.com/handbook/total-rewards/stock-options/#about-your-ownership-in-gitlab]
+    # The laptop part is answered in three places; any of them counts.
+    - - https://handbook.gitlab.com/handbook/people-group/offboarding/faq/#laptop-wipe
+      - https://handbook.gitlab.com/handbook/people-group/offboarding/faq/#can-i-keep-my-laptop
+      - https://handbook.gitlab.com/handbook/people-group/offboarding/#returning-property-to-gitlab
+  keywords: ["90", laptop]
+
+- id: h5
+  level: hard
+  question: What does MVC mean in GitLab's values?
+  answer: Minimal Valuable Change - make the smallest, quickest change that improves the user's outcome.
+  sources:
+    - [https://handbook.gitlab.com/handbook/values/#start-off-by-impacting-the-fewest-users-possible]
+  keywords: [Minimal Valuable Change]
+
+- id: h6
+  level: hard
+  question: How much can team members in Mexico get reimbursed for an ergonomic chair?
+  answer: A one-time 3,000 MXN reimbursement (Global Expansion entity, Mexico section).
+  sources:
+    - [https://handbook.gitlab.com/handbook/total-rewards/benefits/general-and-entity-benefits/global-expansion/#mexico-]
+  keywords: ["3,000"]
+
+- id: h7
+  level: hard
+  question: What is the probation period in Germany?
+  answer: Not in the handbook. The per-country probation table is generated by Hugo from data that is not in the source files.
+  sources: []
+  not_found: true
+
+- id: h8
+  level: hard
+  question: What is the daily per diem when I travel for work?
+  answer: Not in the handbook. Travel expenses live in the finance section, which is not indexed.
+  sources: []
+  not_found: true
+
+# --- everyday: phrased the way a team member would ask, NOT in the handbook's words.
+# Added in step 10, because the questions above mostly reuse handbook wording and so
+# hardly test retrieval (only m1 missed). Each one swaps the handbook term for a plain one.
+
+- id: p1
+  level: everyday
+  question: If I get a friend hired, do I get paid for it?
+  answer: Yes, a flat $1,500 referral bonus, paid once the new hire has been employed for 3 months.
+  sources:
+    - [https://handbook.gitlab.com/handbook/total-rewards/incentives/#referral-bonuses]
+  keywords: ["1,500"]
+
+- id: p2
+  level: everyday
+  question: What gift do I get after working at GitLab for a year?
+  answer: The option of a custom GitLab Tech-Caddy (anniversary swag), plus a mention in the #team-member-updates channel.
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/celebrations/#gitlab-anniversary]
+  keywords: [Tech-Caddy]
+
+- id: p3
+  level: everyday
+  question: I got a letter telling me to serve on a jury. What do I need to do?
+  answer: Tell your supervisor as soon as practical and give them a copy of the summons; enter Jury Duty in Workday. The leave is not authorized until the summons copy is submitted.
+  sources:
+    - - https://handbook.gitlab.com/handbook/people-group/time-off-and-absence/time-off-types/#required-documentation
+      - https://handbook.gitlab.com/handbook/people-group/time-off-and-absence/time-off-types/#request-process-2
+  keywords: [summons]
+
+- id: p4
+  level: everyday
+  question: Can I work from a WeWork instead of my apartment?
+  answer: Yes, working from a co-working space is fine; review the co-working space guidelines in the internal handbook before signing any agreement.
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/general-onboarding/tanewki-tips/#equipment-and-expenses]
+  keywords: [co-working]
+
+- id: p5
+  level: everyday
+  question: My work computer hasn't arrived yet. Can I use my own on my first day?
+  answer: Yes, temporarily; postpone the hardware-related security setup tasks until the GitLab laptop arrives.
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/general-onboarding/tanewki-tips/#equipment-and-expenses]
+  keywords: [security]
+
+- id: p6
+  level: everyday
+  question: I'm having a baby. How much paid time off do I get as a new parent?
+  answer: 16 weeks of paid Parental Leave (any gender, from day one), to be used before the child's first birthday.
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/time-off-and-absence/leave-types/#eligibility-entitlement-and-planning-your-leave]
+  keywords: ["16 weeks"]
+
+- id: p7
+  level: everyday
+  question: Am I expected to work on my birthday?
+  answer: No, GitLab encourages you to take the day off (PTO); if it falls on a weekend, take the Friday before or the Monday after.
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/celebrations/#team-member-birthdays]
+  keywords: [weekend]
+
+- id: p8
+  level: everyday
+  question: How far ahead should I tell my boss before taking a week off?
+  answer: At least twice as many days of notice as the absence, so a 5-day week off needs at least 10 business days' notice.
+  sources:
+    - - https://handbook.gitlab.com/handbook/people-group/time-off-and-absence/time-away-philosophy/#timely--transparent-communication
+      - https://handbook.gitlab.com/handbook/people-group/time-off-and-absence/time-off-types/#pto-protocols-planning-and-coordination
+  keywords: ["10"]
+
+- id: p9
+  level: everyday
+  question: Do I get extra pay if I fill in for my manager for a few months?
+  answer: Yes, an interim bonus - the greater of the standard discretionary bonus ($1,000) or 10% of salary for the interim period.
+  sources:
+    - [https://handbook.gitlab.com/handbook/total-rewards/incentives/#calculation-of-interim-bonus]
+  keywords: ["10%"]
+
+- id: p10
+  level: everyday
+  question: Do I have to answer work emails while I'm on maternity leave?
+  answer: No. You are not required to log in, approve anything, or respond to work emails; disregard automated system emails.
+  sources:
+    - [https://handbook.gitlab.com/handbook/people-group/time-off-and-absence/leave-types/#eligibility-entitlement-and-planning-your-leave]
+  keywords: [not required]
