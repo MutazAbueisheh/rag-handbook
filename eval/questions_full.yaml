@@ -1,0 +1,870 @@
+# Eval set for the FULL handbook index (all sections). Facts were quoted from the source pages and the
+# chunk URLs were resolved by finding the chunks that contain each quote. Same fields as questions.yaml.
+
+- id: fe1
+  level: easy
+  question: What is the maximum an individual can spend per year on Individual Use software?
+  answer: $5,000 per year. Above that, or if several people need it, use the Procurement process.
+  keywords:
+  - 5,000
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/procurement/individual-use-software/#individual-use-software-overview
+- id: fe2
+  level: easy
+  question: What does P.A.U.S.E stand for in the Power of the Pause?
+  answer: Practice Patience, Adjust your Attitude, Understand the Situation, Step Outside, Explain Calmly.
+  keywords:
+  - patience
+  - attitude
+  - understand
+  - step outside
+  - calmly
+  sources:
+  - - https://handbook.gitlab.com/handbook/communication/power-of-the-pause/#p---practice-patience
+  - - https://handbook.gitlab.com/handbook/communication/power-of-the-pause/#e---explain-calmly
+- id: fe3
+  level: easy
+  question: How long is the technical interview call?
+  answer: A 90-minute video call and screen-sharing session.
+  keywords:
+  - '90'
+  sources:
+  - - https://handbook.gitlab.com/handbook/hiring/interviewing/technical/
+- id: fe4
+  level: easy
+  question: How often does the CEO conduct skip-level meetings?
+  answer: Quarterly, with all indirect reports.
+  keywords:
+  - quarterly
+  sources:
+  - - https://handbook.gitlab.com/handbook/leadership/skip-levels/#purpose-and-benefits-of-skip-levels
+- id: fe5
+  level: easy
+  question: Within how many days must new team members complete their assigned compliance courses?
+  answer: Within 30 days of starting (a task in the onboarding issue).
+  keywords:
+  - '30'
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/ethics-compliance-program/compliance-training/#access
+- id: fe6
+  level: easy
+  question: Where should work stopping handbook issues be reported?
+  answer: In the
+  keywords:
+  - handbook-escalation
+  sources:
+  - - https://handbook.gitlab.com/handbook/about/escalation/#reporting-an-issue
+- id: fe7
+  level: easy
+  question: Is Backblaze installed by default on company devices?
+  answer: No. It is only installed if Legal and People Ops request it for a legal hold or investigation.
+  keywords:
+  - legal hold
+  sources:
+  - - https://handbook.gitlab.com/handbook/security/corporate/systems/backblaze/
+- id: fe8
+  level: easy
+  question: What are the six phases of the Risk Management cycle?
+  answer: Awareness, Identification, Evaluation, Control, Implementation, Monitoring.
+  keywords:
+  - awareness
+  - identification
+  - evaluation
+  - control
+  - implementation
+  - monitoring
+  sources:
+  - - https://handbook.gitlab.com/handbook/engineering/testing/risk-mapping/#risk-management
+- id: fm1
+  level: medium
+  question: Can I buy software with my credit card and get the money back?
+  answer: No. All software purchases on personal or corporate credit cards are denied for reimbursement; follow
+    the process and it is paid by Navan virtual card.
+  keywords:
+  - denied
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/procurement/individual-use-software/#individual-use-software-overview
+- id: fm2
+  level: medium
+  question: Are receipts needed for meals during sponsored (customer-billable) travel?
+  answer: No. Meals are reimbursed at the per diem rate and receipts are not required under any circumstances.
+  keywords:
+  - per diem
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/travel/sponsored/#meals-and-incidental-expenses-mie
+- id: fm3
+  level: medium
+  question: Are skip-level meetings recorded?
+  answer: No. A skip-level meeting is never recorded, because it builds trust with team members.
+  keywords:
+  - never
+  sources:
+  - - https://handbook.gitlab.com/handbook/leadership/skip-levels/#conducting-skip-level-meetings
+- id: fm4
+  level: medium
+  question: How much time does a new lead owner have to action an MQL after a reassignment?
+  answer: 2 business hours (a new response timer starts).
+  keywords:
+  - 2 business hours
+  sources:
+  - - https://handbook.gitlab.com/handbook/marketing/marketing-operations/mql-sla/#how-do-slas-work
+- id: fm5
+  level: medium
+  question: Which team members must take the Anti-Bribery and Corruption course?
+  answer: Team members in Finance, Legal & Corporate Affairs, Marketing, and Sales.
+  keywords:
+  - finance
+  - legal
+  - marketing
+  - sales
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/ethics-compliance-program/compliance-training/#courses
+- id: fm6
+  level: medium
+  question: How far ahead of the technical interview does the candidate get the merge request?
+  answer: At least 72 hours before the scheduled call.
+  keywords:
+  - '72'
+  sources:
+  - - https://handbook.gitlab.com/handbook/hiring/interviewing/technical/
+- id: fm7
+  level: medium
+  question: When is a vulnerability in GitLab's code considered fixed?
+  answer: When a version containing the fix is shipped and available to users (packaged); it does not have to be
+    deployed yet, except in GitLab-managed environments.
+  keywords:
+  - available
+  sources:
+  - - https://handbook.gitlab.com/handbook/security/product-security/vulnerability-management/what-does-fixed-mean/#vulnerability-detections-in-code
+- id: fm8
+  level: medium
+  question: Which Sentry projects should support check to find an error for a GitLab.com user?
+  answer: gitlabcom, gitlabcom-clientside and customersgitlabcom.
+  keywords:
+  - gitlabcom-clientside
+  - customersgitlabcom
+  sources:
+  - - https://handbook.gitlab.com/handbook/support/workflows/sentry/#overview
+    - https://handbook.gitlab.com/handbook/support/workflows/sentry/#searching-with-the-users-id-in-gitlabcom-clientside-sentry-project
+- id: fm9
+  level: medium
+  question: Should interviewers ask trick questions in a panel interview?
+  answer: No. Panel interviews are conversations, not tests; no difficult or trick questions.
+  keywords:
+  - "no"
+  sources:
+  - - https://handbook.gitlab.com/handbook/hiring/interviewing/panel/#panel-interviews
+- id: fh1
+  level: hard
+  question: A new US-based individual contributor joins the Finance team. Which compliance and anti-harassment courses
+    are they enrolled in, and how long is the harassment course?
+  answer: Ethics and Code of Conduct, Insider Trading, Public Disclosure Training, Global Data Privacy, Anti-Bribery
+    and Corruption, plus Workplace Harassment 10 (about 60 minutes).
+  keywords:
+  - insider trading
+  - anti-bribery
+  - '60'
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/ethics-compliance-program/compliance-training/#courses
+  - - https://handbook.gitlab.com/handbook/legal/ethics-compliance-program/compliance-training/#anti-harassment
+- id: fh2
+  level: hard
+  question: I need a $6,000 per year software subscription just for me. Can I buy it on my corporate card, and what
+    process applies?
+  answer: No card purchase (it would be denied for reimbursement). It exceeds the $5,000 individual-use limit, so
+    it goes through the Procurement process as a new purchase request.
+  keywords:
+  - procurement
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/procurement/individual-use-software/#individual-use-software-overview
+- id: fh3
+  level: hard
+  question: For the technical interview, how many hours do I have between receiving the merge request at the earliest
+    deadline and the time my review must be done?
+  answer: 48 hours. The MR arrives at least 72 hours before the call and the review must be done at least 24 hours
+    before.
+  keywords:
+  - '48'
+  sources:
+  - - https://handbook.gitlab.com/handbook/hiring/interviewing/technical/
+- id: fh4
+  level: hard
+  question: Why could an MQL show an SLA time of 00:00:00 and still be marked Met?
+  answer: The MQL was assigned and actioned completely outside the rep's business hours, so business-hours response
+    time is 0.
+  keywords:
+  - outside business hours
+  sources:
+  - - https://handbook.gitlab.com/handbook/marketing/marketing-operations/mql-sla/#other-considerations-when-looking-at-sla-reporting
+- id: fh5
+  level: hard
+  question: An external consultant gets accounts and repository access for a 3-month engagement. What two things
+    must be set up on their accounts?
+  answer: Add the -CTR suffix/prefix to their usernames and handles, and set an expiry date for repository access
+    matching the engagement length.
+  keywords:
+  - ctr
+  - expir
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/procurement/consultants/#important-actions
+  - - https://handbook.gitlab.com/handbook/finance/procurement/consultants/#important-actions
+- id: fh6
+  level: hard
+  question: On sponsored travel I booked a hotel above the GSA rate without pre-approval. How much will be reimbursed?
+  answer: The department may limit the reimbursement to the GSA per diem rate; out-of-policy lodging needs pre-approval
+    through NexTravel.
+  keywords:
+  - gsa
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/travel/sponsored/#lodging
+- id: fh7
+  level: hard
+  question: Who won the GitLab company chess tournament in 2024?
+  answer: Not in the handbook.
+  keywords: []
+  not_found: true
+  sources: []
+- id: fh8
+  level: hard
+  question: What is the password of the shared company Zoom account?
+  answer: Not in the handbook.
+  keywords: []
+  not_found: true
+  sources: []
+- id: fp1
+  level: everyday
+  question: My boss's boss wants to meet my team without my manager. Is that normal, and will it be recorded?
+  answer: Yes, that is a skip-level meeting (at least quarterly); it is never recorded.
+  keywords:
+  - skip
+  sources:
+  - - https://handbook.gitlab.com/handbook/leadership/skip-levels/#conducting-skip-level-meetings
+- id: fp2
+  level: everyday
+  question: I'm flying to a customer for a paid project. Do I need to keep my food receipts?
+  answer: No. Meals on sponsored travel are paid at per diem rates and no receipts are needed.
+  keywords:
+  - per diem
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/travel/sponsored/#meals-and-incidental-expenses-mie
+- id: fp3
+  level: everyday
+  question: How long will the coding interview take?
+  answer: The technical interview is a 90-minute video call with screen sharing.
+  keywords:
+  - '90'
+  sources:
+  - - https://handbook.gitlab.com/handbook/hiring/interviewing/technical/
+- id: fp4
+  level: everyday
+  question: Will IT back up all my laptop files with Backblaze?
+  answer: No. Backblaze is only installed for a legal hold or investigation, only relevant data is backed up, and
+    a "Personal Folder" is excluded.
+  keywords:
+  - legal hold
+  sources:
+  - - https://handbook.gitlab.com/handbook/security/corporate/systems/backblaze/
+- id: fp5
+  level: everyday
+  question: How do I get an Ask Me Anything session with an exec on the calendar?
+  answer: Find a slot on the GitLab Team Meetings calendar that works for the host, then Slack the EBA for the department
+    in
+  keywords:
+  - eba
+  sources:
+  - - https://handbook.gitlab.com/handbook/company/amas/#steps-to-request-an-ama
+- id: fp6
+  level: everyday
+  question: A vendor emailed me saying GitLab owes them money. Can I just agree to pay them to settle it?
+  answer: No. Contact RMDR (Legal) immediately; a team member may not bind the company to pay money to settle a
+    dispute without Legal and Corporate Affairs sign-off.
+  keywords:
+  - legal
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/risk-management-dispute-resolution/#when-to-get-in-touch-with-rmdr
+- id: fp7
+  level: everyday
+  question: I'm about to snap at someone on Slack. Any advice from the handbook?
+  answer: Use the Power of the Pause (P.A.U.S.E) - practice patience, adjust your attitude, understand the situation,
+    step outside, explain calmly.
+  keywords:
+  - pause
+  sources:
+  - - https://handbook.gitlab.com/handbook/communication/power-of-the-pause/#p---practice-patience
+- id: fp8
+  level: everyday
+  question: How do I take a Mac screenshot straight to the clipboard?
+  answer: Add the control key, e.g. command + shift + control + 3 (or 4).
+  keywords:
+  - control
+  sources:
+  - - https://handbook.gitlab.com/handbook/tools-and-tips/mac/#taking-screenshots-and-videos
+- id: fe9
+  level: easy
+  question: How quickly must an on-call engineer acknowledge a page?
+  answer: Within 15 minutes, and be at their place of work shortly after.
+  keywords:
+  - '15'
+  sources:
+  - - https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/incident-management/on-call/#on-call-responsibilities-and-expectations-for-both-tier-1-and-tier-2
+    - https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/incident-management/on-call/#practical-aspects-of-being-on-call
+- id: fe10
+  level: easy
+  question: What is the maximum duration of a long-term test quarantine?
+  answer: 3 months; after that the test is deleted automatically.
+  keywords:
+  - 3 months
+  sources:
+  - - https://handbook.gitlab.com/handbook/engineering/testing/quarantine-process/#long-term-quarantine
+- id: fe11
+  level: easy
+  question: What is the Application Security triage SLA for issues?
+  answer: 4 business days.
+  keywords:
+  - 4 business days
+  sources:
+  - - https://handbook.gitlab.com/handbook/security/product-security/security-platforms-architecture/application-security/runbooks/triage-rotation/#triage-sla-policies
+- id: fe12
+  level: easy
+  question: Below what monthly uptime can GitLab.com customers get downtime credits?
+  answer: Below 99.9% monthly uptime.
+  keywords:
+  - '99.9'
+  sources:
+  - - https://handbook.gitlab.com/handbook/support/workflows/downtime_credits_workflow/#overview
+- id: fe13
+  level: easy
+  question: After how many days is an unconfirmed GitLab.com account blocked and scheduled for deletion?
+  answer: 3 days after creation.
+  keywords:
+  - 3 days
+  sources:
+  - - https://handbook.gitlab.com/handbook/support/workflows/reinstating-blocked-accounts/#user-is-blocked-with-no-admin-note
+- id: fe14
+  level: easy
+  question: How much is the patent award when a patent is issued to GitLab?
+  answer: $1,000 per named inventor (Level Three).
+  keywords:
+  - 1,000
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/patent-program/#patent-awards
+- id: fe15
+  level: easy
+  question: What email unsubscribe rate is considered good?
+  answer: Below 0.2%; anything above 1% is a problem. (GitLab benchmark 0.3%.)
+  keywords:
+  - '0.2'
+  sources:
+  - - https://handbook.gitlab.com/handbook/marketing/lifecycle-marketing/email-best-practices/#email-kpis-that-matters
+- id: fe16
+  level: easy
+  question: Within how many days must Navan card receipts be uploaded?
+  answer: Within 30 days of the transaction date (receipts needed for anything over $50).
+  keywords:
+  - '30'
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/accounts-payable/corp-credit-cards/#2-general-guidelines
+- id: fe17
+  level: easy
+  question: How much can a Quarterly MVP expense for the recognition dinner?
+  answer: A meal up to $250 USD, within the same quarter they were selected.
+  keywords:
+  - '250'
+  sources:
+  - - https://handbook.gitlab.com/handbook/sales/field-operations/field-enablement/field-team-recognition/#quarterly-mvp-recognition-dinner
+- id: fe18
+  level: easy
+  question: What are the Family and Friends Day dates for FY27?
+  answer: 2026-12-28, 2026-12-29, 2026-12-30 and 2026-12-31.
+  keywords:
+  - '28'
+  - '31'
+  sources:
+  - - https://handbook.gitlab.com/handbook/company/family-and-friends-day/#fy27-family-and-friends-days
+- id: fe19
+  level: easy
+  question: How long are speedy meetings?
+  answer: 25 or 50 minutes, leaving time between meetings.
+  keywords:
+  - '25'
+  - '50'
+  sources:
+  - - https://handbook.gitlab.com/handbook/company/culture/all-remote/meetings/#what-to-do-before-the-meeting
+- id: fe20
+  level: easy
+  question: What happens to team members without 2FA whose accounts are stale for over 30 days?
+  answer: They are blocked/suspended until resolved; 2FA is mandatory.
+  keywords:
+  - block
+  sources:
+  - - https://handbook.gitlab.com/handbook/security/password-guidelines/#two-factor-authentication-and-time-based-one-time-passwords
+- id: fm10
+  level: medium
+  question: Can on-call engineers recover after a demanding shift?
+  answer: Yes, they are expected to take 1-2 days off as time off in lieu if they need to recover.
+  keywords:
+  - 1-2
+  sources:
+  - - https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/incident-management/on-call/#general-expectations-for-on-call
+- id: fm11
+  level: medium
+  question: How long does an AppSec engineer have to complete a merge request review once they start working on
+    it?
+  answer: 5 business days (then apply AppSecWorkflow::complete). Response within 2 business days.
+  keywords:
+  - 5 business days
+  sources:
+  - - https://handbook.gitlab.com/handbook/security/product-security/security-platforms-architecture/application-security/runbooks/triage-rotation/#response-sla-2-business-days
+- id: fm12
+  level: medium
+  question: How long does a customer have to submit a downtime credit claim?
+  answer: Within 30 days after the affected month ends.
+  keywords:
+  - 30 days
+  sources:
+  - - https://handbook.gitlab.com/handbook/support/workflows/downtime_credits_workflow/#eligibility-requirements
+- id: fm13
+  level: medium
+  question: What is the minimum processing time for a Linux laptop for a new hire in EMEA?
+  answer: 5 weeks (3 weeks for Apple).
+  keywords:
+  - 5 weeks
+  sources:
+  - - https://handbook.gitlab.com/handbook/eta/corporate-it/end-user-services/laptop-management/laptop-ordering/#new-hire-laptop-ordering-process
+- id: fm14
+  level: medium
+  question: What is the gift limit for a U.S. government official?
+  answer: $20 USD per person per event (combined annual limits also apply).
+  keywords:
+  - '20'
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/policies/gifts-contributions/#government-officials---special-considerations
+- id: fm15
+  level: medium
+  question: What are the limits for team meals on the Navan purchasing card?
+  answer: Up to 20 people, not exceeding $100 per person.
+  keywords:
+  - '20'
+  - '100'
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/accounts-payable/corp-credit-cards/#3-permissible-items
+- id: fm16
+  level: medium
+  question: Is a co-working space allowed on the Navan purchasing card?
+  answer: No. Co-working space is a non-permissible card item; it must be expensed personally through the normal
+    reimbursement process.
+  keywords:
+  - not
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/accounts-payable/corp-credit-cards/#co-working-space
+- id: fm17
+  level: medium
+  question: When does GitLab.com lock an account without 2FA after failed sign-ins?
+  answer: After 3 or more failed login attempts within 24 hours.
+  keywords:
+  - '3'
+  - '24'
+  sources:
+  - - https://handbook.gitlab.com/handbook/support/workflows/reinstating-blocked-accounts/#locked-accounts
+- id: fm18
+  level: medium
+  question: What is the target resolution time for a Severity 2 Customer Support Systems incident?
+  answer: 2-4 hours; escalate after 30 minutes without resolution.
+  keywords:
+  - 2-4
+  sources:
+  - - https://handbook.gitlab.com/handbook/eta/css/incidents/#resolution-times
+- id: fm19
+  level: medium
+  question: How long does Finance take to approve a CRO swag order?
+  answer: Finance Business Partners aim to review and approve within 2 business days.
+  keywords:
+  - 2 business days
+  sources:
+  - - https://handbook.gitlab.com/handbook/marketing/brand-experience/merchandise-handling/cro-swag/#faqs-
+- id: fm20
+  level: medium
+  question: When should a CSM hold the kickoff call with a new customer?
+  answer: Within 14 days of the customer start date (Time to Engage goal is 14 days).
+  keywords:
+  - '14'
+  sources:
+  - - https://handbook.gitlab.com/handbook/customer-experience/csm/onboarding/#kickoff-call
+- id: fm21
+  level: medium
+  question: What prize value limits apply to a conference sweepstakes under the standard process?
+  answer: Each prize under $600 USD and all prizes together under $1,000 USD (with listed exceptions).
+  keywords:
+  - '600'
+  - 1,000
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/process-for-a-conference-sweepstakes/#eligibility-requirements-for-proceeding-under-this-process
+- id: fm22
+  level: medium
+  question: What happens to an Enterprise Data issue that is still missing required labels after 30 days?
+  answer: The triage bot closes it automatically (clean-up::close); it can be reopened.
+  keywords:
+  - close
+  sources:
+  - - https://handbook.gitlab.com/handbook/enterprise-data/how-we-work/triage/#label-enforcement
+- id: fm23
+  level: medium
+  question: After a laptop refresh, when must the old laptop be wiped or returned?
+  answer: Within 2 weeks of receiving the replacement laptop.
+  keywords:
+  - 2 weeks
+  sources:
+  - - https://handbook.gitlab.com/handbook/eta/corporate-it/end-user-services/laptop-management/laptop-ordering/#current-refresh-delays-updated-21-august-2026
+- id: fm24
+  level: medium
+  question: How long should a SIRT warm handoff take?
+  answer: No more than 15 minutes, with one person per region.
+  keywords:
+  - '15'
+  sources:
+  - - https://handbook.gitlab.com/handbook/security/security-operations/secops-oncall/#sirt-warm-handoff
+- id: fm25
+  level: medium
+  question: How often at most should someone be on call in the SSCS Tier 2 rotation?
+  answer: No more than once every 4 weeks.
+  keywords:
+  - 4 weeks
+  sources:
+  - - https://handbook.gitlab.com/handbook/engineering/development/sec/oncall/rotation-leader/#ensuring-fair-distribution
+- id: fh9
+  level: hard
+  question: Using the security gearing ratios, what would the top bug bounty reward be if GitLab were worth $5 billion?
+  answer: $50,000. Compromise cost = 1% of $5B = $50M; budget = 10% = $5M; top reward = 1% of budget = $50,000.
+  keywords:
+  - 50,000
+  sources:
+  - - https://handbook.gitlab.com/handbook/security/gearing-ratios/#bug-bounties
+- id: fh10
+  level: hard
+  question: A new hire outside North America, EMEA and APAC starts in 6 weeks and wants a Linux laptop. Is there
+    enough processing time?
+  answer: No. Other regions need at least 9 weeks for Linux (4 weeks for Apple), so an Apple laptop would fit but
+    Linux would not.
+  keywords:
+  - 9 weeks
+  sources:
+  - - https://handbook.gitlab.com/handbook/eta/corporate-it/end-user-services/laptop-management/laptop-ordering/#new-hire-laptop-ordering-process
+- id: fh11
+  level: hard
+  question: I'm sending CRO swag to someone outside the US. How long after Finance approval should I allow, and
+    how long from placing the order?
+  answer: At least 3 weeks after approval (customs buffer), so about 4 weeks from initiating the order.
+  keywords:
+  - 3 weeks
+  - 4 weeks
+  sources:
+  - - https://handbook.gitlab.com/handbook/marketing/brand-experience/merchandise-handling/cro-swag/#standard-turnaround-times-
+- id: fh12
+  level: hard
+  question: For an enterprise prospect (deal over $100K ARR), what are the promotional incentive limits per incentive
+    and per year?
+  answer: Max $50 per incentive ($25 if gift cards) and $150 total per person per calendar year.
+  keywords:
+  - '50'
+  - '150'
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/policies/gifts-contributions/#marketing-promotional-activities-exception
+- id: fh13
+  level: hard
+  question: I'm a named inventor on an invention GitLab accepts, files and later gets issued as a patent. How much
+    do I receive in total?
+  answer: $1,750 ($250 on acceptance + $500 on filing + $1,000 on issue).
+  keywords:
+  - 1,750
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/patent-program/#patent-awards
+  - - https://handbook.gitlab.com/handbook/legal/patent-program/#patent-awards
+- id: fh14
+  level: hard
+  question: GitLab.com had downtime in March. What is the deadline to claim a credit, and how long until the credit
+    is issued?
+  answer: Claim within 30 days after March ends (by about April 30); intake to credit issuance takes up to 60 days.
+  keywords:
+  - '30'
+  - '60'
+  sources:
+  - - https://handbook.gitlab.com/handbook/support/workflows/downtime_credits_workflow/#processing-timeline
+- id: fh15
+  level: hard
+  question: Can I pay for a $6,000 per year tool with my Navan purchasing card?
+  answer: No. Purchases over $5,000 USD annually are not permissible on the card; enter a Purchase Requisition in
+    Zip.
+  keywords:
+  - zip
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/accounts-payable/corp-credit-cards/#2-general-guidelines
+- id: fh16
+  level: hard
+  question: A fast-quarantined test is still broken after 3 days. What are the options, and when would it be deleted?
+  answer: Fix it, remove it, or convert it to long-term quarantine; long-term lasts at most 3 months, after which
+    the test is deleted automatically.
+  keywords:
+  - 3 months
+  sources:
+  - - https://handbook.gitlab.com/handbook/engineering/testing/quarantine-process/#quarantine-phase-durations
+- id: fh17
+  level: hard
+  question: If the SIRT on-call engineer does not acknowledge a page, who gets paged next and when?
+  answer: After 15 minutes all Security Engineers in the sunny region, then the Security Operations manager after
+    another 15 minutes, then the SIRT director.
+  keywords:
+  - manager
+  - director
+  sources:
+  - - https://handbook.gitlab.com/handbook/security/security-operations/secops-oncall/#on-call-paging-workflow
+- id: fh18
+  level: hard
+  question: A Severity 3 Customer Support Systems incident has been unresolved for 10 hours. Should it be escalated,
+    and what is the target resolution time?
+  answer: Yes; Severity 3 escalates after 8 hours without resolution. Target resolution is 24-48 hours.
+  keywords:
+  - 8 hours
+  - 24-48
+  sources:
+  - - https://handbook.gitlab.com/handbook/eta/css/incidents/#resolution-times
+- id: fh19
+  level: hard
+  question: Can a conference sweepstakes with $800 of total prizes include New Zealand?
+  answer: No. New Zealand can only be included when the total value of all prizes is under $500 USD.
+  keywords:
+  - '500'
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/process-for-a-conference-sweepstakes/#eligibility-requirements-for-proceeding-under-this-process
+- id: fh20
+  level: hard
+  question: My Support region has 25 engineers and 5 are already on PTO on my dates. If I take off too, what is
+    the capacity status and what should I do?
+  answer: 6 of 25 = 24%, which is Red (over 20%); consider a different time-off schedule.
+  keywords:
+  - red
+  sources:
+  - - https://handbook.gitlab.com/handbook/support/support-time-off/#choosing-and-recording-time-off
+- id: fh21
+  level: hard
+  question: For the SUS survey, who counts as an experienced user, and how active must a user be to be invited?
+  answer: Tenure of 180 days or more; at least 10 product events across at least 2 stages in the previous 30 days.
+  keywords:
+  - '180'
+  - '10'
+  sources:
+  - - https://handbook.gitlab.com/handbook/product/ux/performance-indicators/system-usability-scale/#regular-participant-criteria
+  - - https://handbook.gitlab.com/handbook/product/ux/performance-indicators/system-usability-scale/#regular-participant-criteria
+- id: fh22
+  level: hard
+  question: How many free lunches per week does the GitLab office cafeteria serve?
+  answer: Not in the handbook.
+  keywords: []
+  not_found: true
+  sources: []
+- id: fh23
+  level: hard
+  question: Which hotel hosts GitLab's annual holiday gala?
+  answer: Not in the handbook.
+  keywords: []
+  not_found: true
+  sources: []
+- id: fh24
+  level: hard
+  question: What is the guest Wi-Fi password at the GitLab office?
+  answer: Not in the handbook.
+  keywords: []
+  not_found: true
+  sources: []
+- id: fh25
+  level: hard
+  question: I'm a newly hired senior engineer. Do I start as a code reviewer, and how long do I have to become a
+    maintainer?
+  answer: No, senior+ hires become trainee maintainers instead of reviewers, and should complete maintainership
+    within 12 months of finishing onboarding.
+  keywords:
+  - trainee
+  - 12 months
+  sources:
+  - - https://handbook.gitlab.com/handbook/engineering/workflow/code-review/#senior-maintainers
+- id: fp9
+  level: everyday
+  question: I got paged at 3am while on call. How fast do I have to respond?
+  answer: Acknowledge within 15 minutes.
+  keywords:
+  - '15'
+  sources:
+  - - https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/incident-management/on-call/#on-call-responsibilities-and-expectations-for-both-tier-1-and-tier-2
+    - https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/incident-management/on-call/#practical-aspects-of-being-on-call
+- id: fp10
+  level: everyday
+  question: I was on call all weekend and I'm wiped out. Can I take some time off?
+  answer: Yes, take 1-2 days off as time off in lieu.
+  keywords:
+  - 1-2
+  sources:
+  - - https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/incident-management/on-call/#general-expectations-for-on-call
+- id: fp11
+  level: everyday
+  question: My new laptop arrived. What do I do with the old one?
+  answer: Wipe or return it within 2 weeks of receiving the replacement.
+  keywords:
+  - 2 weeks
+  sources:
+  - - https://handbook.gitlab.com/handbook/eta/corporate-it/end-user-services/laptop-management/laptop-ordering/#current-refresh-delays-updated-21-august-2026
+- id: fp12
+  level: everyday
+  question: I'm joining from Germany and want a Linux laptop on day one. How early does it need to be ordered?
+  answer: At least 5 weeks before (EMEA Linux); Apple takes 3 weeks.
+  keywords:
+  - 5 weeks
+  sources:
+  - - https://handbook.gitlab.com/handbook/eta/corporate-it/end-user-services/laptop-management/laptop-ordering/#new-hire-laptop-ordering-process
+- id: fp13
+  level: everyday
+  question: Is GitLab off between Christmas and New Year?
+  answer: Yes, Family and Friends days on 2026-12-28 to 2026-12-31 (FY27).
+  keywords:
+  - '28'
+  sources:
+  - - https://handbook.gitlab.com/handbook/company/family-and-friends-day/#fy27-family-and-friends-days
+- id: fp14
+  level: everyday
+  question: I want to give a gift to someone who works for the US government. How much can I spend?
+  answer: At most $20 USD per person per event.
+  keywords:
+  - '20'
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/policies/gifts-contributions/#government-officials---special-considerations
+- id: fp15
+  level: everyday
+  question: Can I take my whole team out to dinner on the company card?
+  answer: Yes for up to 20 people, at no more than $100 per person.
+  keywords:
+  - '100'
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/accounts-payable/corp-credit-cards/#3-permissible-items
+- id: fp16
+  level: everyday
+  question: Can I pay for my WeWork membership with the purchasing card?
+  answer: No. Co-working space is not permitted on the card; expense it personally through the normal reimbursement
+    process.
+  keywords:
+  - not
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/accounts-payable/corp-credit-cards/#co-working-space
+- id: fp17
+  level: everyday
+  question: A coworker's dad passed away. Can I send flowers with the purchasing card?
+  answer: Yes, gifts for significant life events are allowed up to $125 USD.
+  keywords:
+  - '125'
+  sources:
+  - - https://handbook.gitlab.com/handbook/finance/accounts-payable/corp-credit-cards/#3-permissible-items
+- id: fp18
+  level: everyday
+  question: I mistyped my password a few times and now my GitLab.com account is locked. Will it unlock by itself?
+  answer: No. After a successful login the user gets an email with a six-digit unlock code to enter on a verification
+    page.
+  keywords:
+  - code
+  sources:
+  - - https://handbook.gitlab.com/handbook/support/workflows/reinstating-blocked-accounts/#locked-accounts
+- id: fp19
+  level: everyday
+  question: I signed up for GitLab.com but never clicked the confirmation email. What happens?
+  answer: After 3 days the account is blocked and scheduled for deletion.
+  keywords:
+  - 3 days
+  sources:
+  - - https://handbook.gitlab.com/handbook/support/workflows/reinstating-blocked-accounts/#user-is-blocked-with-no-admin-note
+- id: fp20
+  level: everyday
+  question: I deleted my free GitLab.com account. When can I reuse my username?
+  answer: After waiting 7 days from the deletion request.
+  keywords:
+  - 7 days
+  sources:
+  - - https://handbook.gitlab.com/handbook/support/workflows/reinstating-blocked-accounts/#user-initiated-self-serve-deletion
+- id: fp21
+  level: everyday
+  question: GitLab.com was down a lot last month. Can our company get money back?
+  answer: Eligible customers get credits if monthly uptime fell below 99.9%, claimed within 30 days after the month
+    ends.
+  keywords:
+  - '99.9'
+  sources:
+  - - https://handbook.gitlab.com/handbook/support/workflows/downtime_credits_workflow/#overview
+- id: fp22
+  level: everyday
+  question: I came up with an invention at work. Do I get a bonus for it?
+  answer: Yes, the patent program pays $250 when accepted, $500 when filed and $1,000 when issued, per named inventor.
+  keywords:
+  - '250'
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/patent-program/#patent-awards
+- id: fp23
+  level: everyday
+  question: I've got a meeting next week. When should I send the agenda?
+  answer: 72 hours in advance (24 hours minimum).
+  keywords:
+  - '72'
+  sources:
+  - - https://handbook.gitlab.com/handbook/company/culture/all-remote/meetings/#what-to-do-before-the-meeting
+- id: fp24
+  level: everyday
+  question: We recorded a meeting. When should I post the recording?
+  answer: Add the recording link to the agenda within 12 hours after the meeting.
+  keywords:
+  - 12 hours
+  sources:
+  - - https://handbook.gitlab.com/handbook/company/culture/all-remote/meetings/#what-to-do-after-the-meeting
+- id: fp25
+  level: everyday
+  question: A test keeps failing randomly and I was told to quarantine it. How long can it stay quarantined?
+  answer: Fast quarantine up to 3 days; long-term quarantine up to 3 months, then it is deleted automatically.
+  keywords:
+  - 3 months
+  sources:
+  - - https://handbook.gitlab.com/handbook/engineering/testing/quarantine-process/#long-term-quarantine
+- id: fp26
+  level: everyday
+  question: I review merge requests and I'm going on vacation. What should I do with my reviews?
+  answer: Check assigned reviews on the last working day; leave a message with PTO dates or reassign; tell the author
+    if a review can't be finished.
+  keywords:
+  - reassign
+  sources:
+  - - https://handbook.gitlab.com/handbook/engineering/workflow/code-review/#managing-review-assignments-before-pto
+- id: fp27
+  level: everyday
+  question: I was picked as a quarterly MVP! Can I expense a fancy dinner?
+  answer: Yes, a meal up to $250 USD, expensed within the same quarter; only the meal qualifies.
+  keywords:
+  - '250'
+  sources:
+  - - https://handbook.gitlab.com/handbook/sales/field-operations/field-enablement/field-team-recognition/#quarterly-mvp-recognition-dinner
+- id: fp28
+  level: everyday
+  question: How long does it take for swag to arrive in the US?
+  answer: 3-7 business days after approval and fulfillment; allow about 2 weeks from placing the order.
+  keywords:
+  - 3-7
+  sources:
+  - - https://handbook.gitlab.com/handbook/marketing/brand-experience/merchandise-handling/cro-swag/#standard-turnaround-times-
+- id: fp29
+  level: everyday
+  question: Do support engineers get Family and Friends days off like everyone else?
+  answer: Support works as normal on those days; in FY26 Support team members may take 4 days at their convenience
+    instead.
+  keywords:
+  - 4 days
+  sources:
+  - - https://handbook.gitlab.com/handbook/support/support-time-off/#how-support-handles-family-and-friends-days
+- id: fp30
+  level: everyday
+  question: I want to run a raffle at our conference booth. Are there limits on the prizes?
+  answer: Each prize under $600 USD and all prizes together under $1,000 USD under the standard process.
+  keywords:
+  - '600'
+  sources:
+  - - https://handbook.gitlab.com/handbook/legal/process-for-a-conference-sweepstakes/#eligibility-requirements-for-proceeding-under-this-process

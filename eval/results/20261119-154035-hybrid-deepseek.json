@@ -1,0 +1,511 @@
+{
+  "settings": {
+    "CHUNK_SPLIT_LEVEL": 3,
+    "CHUNK_MAX_TOKENS": 500,
+    "CHUNK_OVERLAP_TOKENS": 50,
+    "EMBED_MODEL": "nomic-embed-text",
+    "TOP_K": 6,
+    "RETRIEVAL_MODE": "hybrid",
+    "QUERY_REWRITE": false,
+    "RERANK": false,
+    "QUESTIONS": "questions.yaml",
+    "INDEXED_CHUNKS": 48420,
+    "LLM": "deepseek/deepseek-flash"
+  },
+  "summary": {
+    "easy/chunk": {
+      "hit@1": 0.6666666666666666,
+      "hit@3": 0.8333333333333334,
+      "hit@6": 1.0,
+      "hit@10": 1.0,
+      "MRR": 0.7638888888888888
+    },
+    "easy/page": {
+      "hit@1": 0.8333333333333334,
+      "hit@3": 1.0,
+      "hit@6": 1.0,
+      "hit@10": 1.0,
+      "MRR": 0.8888888888888888
+    },
+    "medium/chunk": {
+      "hit@1": 0.5555555555555556,
+      "hit@3": 0.8888888888888888,
+      "hit@6": 0.8888888888888888,
+      "hit@10": 0.8888888888888888,
+      "MRR": 0.6851851851851852
+    },
+    "medium/page": {
+      "hit@1": 0.6666666666666666,
+      "hit@3": 0.8888888888888888,
+      "hit@6": 0.8888888888888888,
+      "hit@10": 0.8888888888888888,
+      "MRR": 0.7777777777777778
+    },
+    "hard/chunk": {
+      "hit@1": 0.5,
+      "hit@3": 0.8333333333333334,
+      "hit@6": 0.8333333333333334,
+      "hit@10": 0.8333333333333334,
+      "MRR": 0.6666666666666666
+    },
+    "hard/page": {
+      "hit@1": 0.5,
+      "hit@3": 1.0,
+      "hit@6": 1.0,
+      "hit@10": 1.0,
+      "MRR": 0.7222222222222222
+    },
+    "everyday/chunk": {
+      "hit@1": 0.2,
+      "hit@3": 0.5,
+      "hit@6": 0.7,
+      "hit@10": 0.7,
+      "MRR": 0.38333333333333336
+    },
+    "everyday/page": {
+      "hit@1": 0.2,
+      "hit@3": 0.6,
+      "hit@6": 0.8,
+      "hit@10": 0.8,
+      "MRR": 0.4166666666666667
+    },
+    "all/chunk": {
+      "hit@1": 0.45161290322580644,
+      "hit@3": 0.7419354838709677,
+      "hit@6": 0.8387096774193549,
+      "hit@10": 0.8387096774193549,
+      "MRR": 0.5994623655913978
+    },
+    "all/page": {
+      "hit@1": 0.5161290322580645,
+      "hit@3": 0.8387096774193549,
+      "hit@6": 0.9032258064516129,
+      "hit@10": 0.9032258064516129,
+      "MRR": 0.6720430107526881
+    },
+    "easy/keywords": 1.0,
+    "easy/judge": {
+      "CORRECT": 5,
+      "PARTIAL": 1,
+      "WRONG": 0
+    },
+    "medium/keywords": 1.0,
+    "medium/judge": {
+      "CORRECT": 7,
+      "PARTIAL": 2,
+      "WRONG": 0
+    },
+    "hard/keywords": 0.75,
+    "hard/judge": {
+      "CORRECT": 6,
+      "PARTIAL": 1,
+      "WRONG": 1
+    },
+    "everyday/keywords": 0.7,
+    "everyday/judge": {
+      "CORRECT": 7,
+      "PARTIAL": 2,
+      "WRONG": 1
+    },
+    "all/keywords": 0.8484848484848485,
+    "all/judge": {
+      "CORRECT": 25,
+      "PARTIAL": 6,
+      "WRONG": 2
+    }
+  },
+  "rows": [
+    {
+      "id": "e1",
+      "level": "easy",
+      "question": "What does CREDIT stand for?",
+      "rank": 3,
+      "page_rank": 3,
+      "answer": "According to source [1], CREDIT stands for **Collaboration, Results, Efficiency, Diversity & Inclusion, Iteration, and Transparency** [1]. Source [3] describes the six core values as **Collaboration, Results for Customers, Efficiency, Diversity, Inclusion & Belonging, Iteration, and Transparency**, which together spell **CREDIT** [3].",
+      "seconds": 4,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "It gives the expected full CREDIT expansion via source [3], matching Collaboration, Results for Customers, Efficiency, Diversity Inclusion & Belonging, Iteration, and Transparency."
+    },
+    {
+      "id": "e2",
+      "level": "easy",
+      "question": "How much money can I get reimbursed per year for growth and development?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "Team members can be reimbursed up to $10,000 per calendar year for eligible growth experiences, provided they meet all eligibility requirements [1]. If an opportunity spans more than one year, costs can be distributed across multiple years, but you still cannot exceed $10,000 expensed per year [3].",
+      "seconds": 2,
+      "keywords_ok": true,
+      "judge": "PARTIAL",
+      "judge_reason": "It correctly states the $10,000 per calendar year cap, but it omits the expected detail that reimbursement is through Navan."
+    },
+    {
+      "id": "e3",
+      "level": "easy",
+      "question": "How long do I have to exercise my vested stock options after leaving GitLab?",
+      "rank": 4,
+      "page_rank": 1,
+      "answer": "If your employment ends for any reason, you have a three-month window to exercise your vested options or lose them [2]. The handbook also states that if a team member leaves GitLab, they have 90 days post-termination to exercise their vested options [4]. You can generally exercise options that are vested as of your last day of service [1], and options that have not otherwise expired expire 10 years after they were issued [1]. Unvested RSUs and options are forfeited on your exit date [4]. During the exercise window, you would have to pay the exercise price and, in some cases, tax on the gain [2].",
+      "seconds": 3,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The answer gives the key facts\u201490 days/three months to exercise vested options after termination and forfeiture of unvested RSUs/options\u2014without contradicting the expected answer."
+    },
+    {
+      "id": "e4",
+      "level": "easy",
+      "question": "Can I wipe my own laptop on my last day?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "No. Your laptop is required to be wiped on your last day, but you should book an appointment with an IT Ops team member for that day [1]. Under no circumstance should you wipe your own laptop; laptop wipes must be done by an IT Ops team member for logs [1]. Laptop wipes must be performed by scheduling an appointment with an IT analyst [2]. The only stated exception is if you are performing your own disk wipe at IT\u2019s request to troubleshoot a technical problem with the laptop [2].",
+      "seconds": 2,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "It clearly answers No and includes the key facts that the laptop must be wiped on the last day by an IT Ops team member, with an appointment booked."
+    },
+    {
+      "id": "e5",
+      "level": "easy",
+      "question": "What is the first thing an onboarding buddy should do?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "The first and most important thing an onboarding buddy should do is schedule a call with the GitLab team-member [1]. They can do this in the days leading up to the new team member starting by asking the manager for the new starter\u2019s personal email address, introducing themselves, and asking when a good time for an initial coffee chat would be [1]. They should consider picking a time toward the end of the new team member\u2019s first day so the new team member has time to digest some of the onboarding issue and can bring questions to the coffee chat [1].",
+      "seconds": 2,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The system identifies scheduling a call with the new team member in the days before they start, matching the expected key fact with only extra supporting detail."
+    },
+    {
+      "id": "e6",
+      "level": "easy",
+      "question": "How quickly does People Operations respond to an employment verification request?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "People Operations responds to an employment verification request within 24 hours [1].",
+      "seconds": 1,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The system states People Operations responds within 24 hours, matching the expected answer exactly."
+    },
+    {
+      "id": "m1",
+      "level": "medium",
+      "question": "Is there a cap on how many vacation days I can take?",
+      "rank": null,
+      "page_rank": null,
+      "answer": "The sources do not state a general cap on total vacation days a team member may take. For statutory vacation specifically, Israel caps statutory vacation at a maximum of 28 days from the eighth year onward [1], and Korea caps statutory vacation at up to 25 days/year for team members with 3+ years of service [5]. Other location entries describe minimum or standard statutory entitlements rather than an overall cap: the Netherlands has a minimum of 20 vacation days annually [2], Germany has at least 20 vacation days [3], and Belgium has 20 statutory vacation days [6]. Brazil lists rules for dividing and using statutory leave but does not state a total-day cap [4]. Israel also notes that flexible PTO is in addition to statutory vacation entitlements [1], and Germany says statutory vacation runs separately from GitLab PTO [3].",
+      "seconds": 5,
+      "keywords_ok": true,
+      "judge": "PARTIAL",
+      "judge_reason": "It correctly notes there is no general cap on total vacation days, but it omits the key exception that more than 25 consecutive calendar days requires special permission from the manager, People Business Partner, and Absence Management team."
+    },
+    {
+      "id": "m2",
+      "level": "medium",
+      "question": "Will GitLab sponsor my H-1B visa?",
+      "rank": 3,
+      "page_rank": 1,
+      "answer": "No. GitLab does not support any visa that requires sponsorship [2], and the US H-1B is specifically listed among the visas GitLab does not sponsor [3]. GitLab also instructs that candidates be told GitLab will not sponsor work visas [5].",
+      "seconds": 2,
+      "keywords_ok": true,
+      "judge": "PARTIAL",
+      "judge_reason": "It correctly answers No and lists H-1B as not sponsored, but its blanket \u201cany visa that requires sponsorship\u201d omits/contradicts the expected Netherlands exception."
+    },
+    {
+      "id": "m3",
+      "level": "medium",
+      "question": "How much does GitLab put into my pension in the UK?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "GitLab contributes **4% of your basic salary** to the UK pension [1][6]. The employee contribution minimum is **5% of basic salary** [1][6]. If you increase your employee contribution percentage, the company contribution remains fixed as outlined [3]. Pension contributions are based on **basic salary only** and do not include commission, bonuses, or overtime payments [6].",
+      "seconds": 3,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "It states GitLab contributes 4% of basic salary and the employee minimum is 5%, matching the expected answer."
+    },
+    {
+      "id": "m4",
+      "level": "medium",
+      "question": "Does GitLab match my 401(k) contributions?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "Yes. For the US 401(k) plan, GitLab matches 50% of contributions on the first 6% of earnings, up to $1,500 annually [1]. The plan is described as offering immediate eligibility and vesting [1].",
+      "seconds": 2,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "It states the expected match details\u201450% on the first 6% of earnings, up to $1,500 annually\u2014and adds no contradicting information."
+    },
+    {
+      "id": "m5",
+      "level": "medium",
+      "question": "Who needs to approve a $5,000 conference from my growth and development budget?",
+      "rank": 3,
+      "page_rank": 2,
+      "answer": "A $5,000 conference from the Growth and Development budget falls in the $1,000.01\u2013$10,000 approval tier, so it requires **Manager + VP approval** [3]. Managers should understand what they are approving and be able to explain the reasoning and benefit behind the request [3]. Conference registration fees are eligible for G&D reimbursement, while travel, lodging, and meals must be expensed separately under the travel expense policy [2].",
+      "seconds": 3,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The system correctly states that Manager + VP approval is required for a $5,000 conference under the $1,000.01\u2013$10,000 tier."
+    },
+    {
+      "id": "m6",
+      "level": "medium",
+      "question": "Can I use a 360 review to manage someone's poor performance?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "No. The 360 process is meant to support development and growth, and 360s should not be used as performance management tools [1]. A 360 should not replace regular, ongoing feedback or serve as a replacement for asking stakeholders and peers how things are going [1]. While 360 feedback is described as a valuable component of the performance review and talent assessment process [2], it represents a single anonymous point in time and should not be the core data point [1]. If unsatisfactory performance is identified, managers should address it timely and honestly and should not wait for the 360 feedback process to address performance matters [3].",
+      "seconds": 2,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The system clearly states \u201cNo,\u201d explains that 360s support development and growth, and says they should not be used as performance management tools, matching the expected answer."
+    },
+    {
+      "id": "m7",
+      "level": "medium",
+      "question": "How long can I work from another country without changing my official location?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "You can work from another country for up to 183 days (approximately 6 months) without completing a long-term relocation request [1]. You may live or work outside your permanent location, as specified in Workday, for a maximum total of 183 days per calendar year [3]. However, you must still reside in your primary location for at least 183 days per year, and at least half of the time worked must be from the primary location [1][3]. Working in a new location for more than 183 days qualifies as a long-term relocation [1].",
+      "seconds": 2,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "It states the 183-day per calendar year limit outside the primary location and the requirement to reside there at least 183 days per year, with extra details that do not contradict the expected answer."
+    },
+    {
+      "id": "m8",
+      "level": "medium",
+      "question": "Do engineers in Australia get anything extra for being on call?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "Yes, for certain engineers: engineers based in Australia who are part of the Development and Infrastructure departments are eligible for time in lieu after on-call shifts [1]. The full shift/state of readiness is compensated, not only the actual time worked [1]. A 4-hour shift earns \u00bd day time in lieu, an 8-hour shift earns 1 day, and a 24-hour shift earns 3 days [1]. Time in lieu must be taken within 2 weeks of shift completion [1]. For weekend shifts, engineers should be mindful not to exceed a 38-hour work-week, and can use flexible PTO for additional time off if needed [1]. Time in lieu is requested through Workday by selecting \u201cTime Off in Lieu\u201d [1]. The source also says this applies to Development and Infrastructure and will be reviewed and implemented for other Engineering departments iteratively [1].",
+      "seconds": 4,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The system answer confirms that Australia-based engineers in Development and Infrastructure get time in lieu after on-call shifts, matching the expected answer and adding non-contradictory detail."
+    },
+    {
+      "id": "m9",
+      "level": "medium",
+      "question": "Who should I contact if I experience discrimination at work?",
+      "rank": 2,
+      "page_rank": 2,
+      "answer": "If you believe you have been discriminated against or witnessed discriminatory practices, contact the Chief People Officer, a People Business Partner, or the Team Member Relations Specialist to initiate an investigation into the behavior [2]. GitLab has also engaged Lighthouse Services to provide anonymous reporting methods, as described in the \u201cHow to Report Violations\u201d section [2]. Team members must report suspected discrimination or violations right away and should follow the discrimination reporting steps set out in the Handbook [1]. Team members in Maine may also file a complaint through the Maine Human Rights Commission within 300 days of the alleged discrimination [4]. For pay-transparency discrimination, the source says to contact OFCCP if you believe you have experienced discrimination [6].",
+      "seconds": 3,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The system gives the exact expected contacts\u2014Chief People Officer, People Business Partner, or Team Member Relations Specialist\u2014and adds non-contradictory extra reporting details."
+    },
+    {
+      "id": "h1",
+      "level": "hard",
+      "question": "How long is parental leave in New Zealand, and how much of it is paid?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "In New Zealand, Primary Carer Leave can last up to 26 weeks and must be taken in one continuous period; eligible team members can receive government-funded parental leave pay for it [1]. Extended parental leave is unpaid: eligible team members employed at least six but less than twelve months can take up to 26 weeks total, while those employed at least twelve months can take up to 52 weeks total, less any Primary Carer Leave taken, with a maximum of 26 weeks deducted [1]. For pay, if eligible, GitLab supplements the government-funded payment so the team member receives 100% pay for up to 16 weeks of Parental Leave [3]. Partner Leave runs concurrently with GitLab Parental Leave and provides up to 100% of regular salary for up to 16 weeks [3].",
+      "seconds": 9,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "It states Primary Carer Leave lasts up to 26 weeks with government-funded pay and that GitLab tops up pay to 100% of salary for up to 16 weeks, matching the expected answer."
+    },
+    {
+      "id": "h2",
+      "level": "hard",
+      "question": "If 100 of my RSUs vest and my tax rate is 30%, how many shares do I keep?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "If 100 RSUs vest and your tax rate is 30%, 30 shares would be sold to cover the taxes due [1]. The remaining 70 shares would be placed in your E*TRADE account and are fully owned by you [1].",
+      "seconds": 2,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The system correctly states that 30 shares are sold to cover taxes and the remaining 70 shares are kept, matching the expected answer."
+    },
+    {
+      "id": "h3",
+      "level": "hard",
+      "question": "Compare what GitLab contributes to retirement savings in the UK and in the US.",
+      "rank": 2,
+      "page_rank": 2,
+      "answer": "In the UK, GitLab contributes 4% of basic salary to the Group Personal Pension Plan, and the employee contributes at least 5% of basic salary [2]. In the US, GitLab matches 50% of contributions on the first 6% of earnings, up to $1,500 annually [1]. The US 401(k) plan has immediate eligibility and vesting [1]. The UK pension has automatic enrollment criteria based on earnings and age [2]. These are different plan designs and currencies, so the contribution structures are not directly equivalent [1][2].",
+      "seconds": 3,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The system provides the key UK 4% and US 50% of first 6% up to $1,500 facts and adds no contradictory information."
+    },
+    {
+      "id": "h4",
+      "level": "hard",
+      "question": "I'm leaving GitLab. What happens to my stock options, and what do I do with my laptop?",
+      "rank": null,
+      "page_rank": 3,
+      "answer": "If you leave GitLab, you will generally be able to exercise options that are vested as of your last day of service [3]. A team member who leaves GitLab has 90 days post-termination to exercise their vested options [5]. Unvested RSUs and options are forfeited on the date of the team member\u2019s exit from the company [5]. If not otherwise expired through termination of employment, stock options expire 10 years after they were issued [3], and more information is in the \u201cExercise Window after Termination\u201d section [2]. You should also ensure your personal email address is up to date for accounts you\u2019ll need after your last day, which may include Carta for stock options [4].\n\nFor your laptop, if you do not qualify to keep the GitLab-issued laptop, GitLab may request that the device be returned to GitLab stock or offer you the option to buy it at a reduced cost [1]. GitLab also offers options if you are eligible to keep your old laptop but choose not to [1].",
+      "seconds": 6,
+      "keywords_ok": true,
+      "judge": "PARTIAL",
+      "judge_reason": "It correctly covers the 90-day exercise window and forfeiture of unvested equity, but it omits the key laptop fact that IT Ops wipes the laptop on the last day and returns it with a prepaid label."
+    },
+    {
+      "id": "h5",
+      "level": "hard",
+      "question": "What does MVC mean in GitLab's values?",
+      "rank": 2,
+      "page_rank": 2,
+      "answer": "In GitLab\u2019s values, MVC stands for **Minimal Valuable Change** [2]. It means encouraging MVCs to be as small as possible and always looking for the quickest change that improves the user\u2019s outcome [2]. If the change is validated as adding more value than what exists, then it should be done; the change may be additive or subtractive, and there is no need to wait for something more robust [2]. This applies to everything GitLab does across all functions, and for product MVCs there is an additional responsibility to validate with customers that useful functionality is being added without obvious bugs or usability issues [2].",
+      "seconds": 3,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "It identifies MVC as Minimal Valuable Change and accurately conveys making the smallest, quickest change that improves the user's outcome."
+    },
+    {
+      "id": "h6",
+      "level": "hard",
+      "question": "How much can team members in Mexico get reimbursed for an ergonomic chair?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "Team members in Mexico can receive a one-time 3,000 MXN reimbursement for an ergonomic chair [1]. They should follow the Navan policy guidelines for reimbursement instructions [1].",
+      "seconds": 2,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The system states the key fact of a one-time 3,000 MXN reimbursement for an ergonomic chair, with no contradiction."
+    },
+    {
+      "id": "h7",
+      "level": "hard",
+      "question": "What is the probation period in Germany?",
+      "answer": "The sources do not state a specific probation period length for Germany. They say that, upon joining GitLab, some team members\u2014location-dependent\u2014have a probationary period between 1 and 9 months, and that common practice is for contracts in each country to have the maximum allowable probationary period [1]. The Germany-specific sources discuss employment agreements and relocation/Works Council steps but do not mention a probation period length [4][6].",
+      "seconds": 3,
+      "keywords_ok": false,
+      "judge": "CORRECT",
+      "judge_reason": "The system clearly states that the Germany-specific probation period is not provided in the sources, which matches the expected \u201cNot in the handbook\u201d answer without contradicting it."
+    },
+    {
+      "id": "h8",
+      "level": "hard",
+      "question": "What is the daily per diem when I travel for work?",
+      "answer": "The provided sources do not give a single fixed daily per diem amount. They say travelers are reimbursed the per diem rate for their travel destination for travel-related meal expenses, and receipts are not required for those meal reimbursements [2]. The M&IE rate includes meals, drinks, tax and tip, plus incidentals such as baggage carriers, bellhops, and hotel staff [2]. For international M&IE rates, the handbook points to the U.S. Department of State M&IE Rates web page [2]. It also says to multiply the per diem rates by the days on site plus your two travel days [1], and that the first and last day of travel are reimbursed [2].",
+      "seconds": 3,
+      "keywords_ok": false,
+      "judge": "WRONG",
+      "judge_reason": "It does not state that travel/per diem information is absent from the indexed handbook and instead provides per diem policy details, contradicting the expected answer."
+    },
+    {
+      "id": "p1",
+      "level": "everyday",
+      "question": "If I get a friend hired, do I get paid for it?",
+      "rank": 4,
+      "page_rank": 4,
+      "answer": "Yes\u2014GitLab offers a referral bonus once the new team member has been employed with the company for 3 months [4]. The current structure is a flat **$1,500 base referral bonus** for a new hire [4]. All GitLab team members are eligible for the Referral Bonus except in certain circumstances [6]. If the candidate was submitted by someone else, the first Team Member to have submitted the candidate is considered the Referrer [6].",
+      "seconds": 2,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "It states the flat $1,500 referral bonus is paid once the new hire has been employed for 3 months, matching the expected answer."
+    },
+    {
+      "id": "p2",
+      "level": "everyday",
+      "question": "What gift do I get after working at GitLab for a year?",
+      "rank": 2,
+      "page_rank": 2,
+      "answer": "After working at GitLab for one year, team members celebrating their one-year anniversary have the option to receive a custom GitLab Tech-Caddy [2]. No action is required to receive anniversary gifts; the vendor team Brilliant emails you on the day of your anniversary with a redemption link [2]. All celebrants also receive a mention in the **#team-member-updates** channel [2].",
+      "seconds": 2,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The system answer includes the key facts\u2014the optional custom GitLab Tech-Caddy anniversary swag and the mention in #team-member-updates\u2014without contradicting the expected answer."
+    },
+    {
+      "id": "p3",
+      "level": "everyday",
+      "question": "I got a letter telling me to serve on a jury. What do I need to do?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "Notify your manager as soon as you receive the jury summons and discuss the potential duration and impact on your work [1]. You should advise your supervisor as soon as practical after receiving the summons and provide a copy of the summons or subpoena; no Legal Civic Proceeding Leave of Absence will be authorized until a copy is submitted [3].\n\nEnter the jury duty dates in Workday by selecting the day(s) you need, clicking \u201cTime-Off,\u201d clicking \u201cJury Duty,\u201d optionally adding a comment, and clicking \u201cSubmit\u201d [1]. Attach a copy of the summons to your Workday entry or email it to leaves@gitlab.com [1]. You should also create a coverage plan for your responsibilities and set expectations for communication during your absence and your return to work [1]. Workday is the single source of truth for tracking and communicating all time off [1].\n\nEligible team members receive 100% of their weekly wages through paid leave unless the absence for civil legal proceedings exceeds 25 working days; if it exceeds 25 working days, Absence Management will review the case and follow up individually [6]. For PTY LTD team members, GitLab provides paid community service leave for jury duty, including \u201cmake-up pay\u201d for the first 10 days of jury selection and jury duty so the team member receives 100% of salary for those first 10 days; that leave runs concurrently with GitLab PTO, and team members must select `Military Leave` under the `Leaves` dropdown in Workday and provide evidence showing attendance at jury selection or jury duty [2].",
+      "seconds": 9,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "It gives the key expected facts\u2014notify your supervisor as soon as practical, provide a copy of the summons, enter Jury Duty in Workday, and that leave is not authorized until the summons copy is submitted\u2014and its extra details do not contradict them."
+    },
+    {
+      "id": "p4",
+      "level": "everyday",
+      "question": "Can I work from a WeWork instead of my apartment?",
+      "rank": null,
+      "page_rank": null,
+      "answer": "The sources do not name WeWork specifically, but they say GitLab team members are allowed to expense costs associated with coworking spaces or external offices because working from home is not always ideal or desired [1]. If you are new to a remote role, you should ask your manager whether external office space is reimbursable [1]. So a coworking space may be an option, but you should confirm reimbursement with your manager [1].",
+      "seconds": 3,
+      "keywords_ok": false,
+      "judge": "PARTIAL",
+      "judge_reason": "It confirms coworking spaces may be allowed/reimbursable, but misses the key instruction to review the co-working space guidelines in the internal handbook before signing any agreement."
+    },
+    {
+      "id": "p5",
+      "level": "everyday",
+      "question": "My work computer hasn't arrived yet. Can I use my own on my first day?",
+      "rank": 1,
+      "page_rank": 1,
+      "answer": "Yes\u2014Source [1] says that if your GitLab laptop hasn\u2019t arrived by your first day, you\u2019re welcome to use a personal laptop temporarily, and you should postpone any hardware-related security setup tasks until your GitLab laptop arrives [1]. Source [2] also says that if your laptop hasn\u2019t arrived near your start date, you should email `it-help@gitlab.com` and cc `people_operations@gitlab.com` [2].",
+      "seconds": 2,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The answer confirms temporary personal laptop use and postponing hardware-related security setup until the GitLab laptop arrives, with no contradiction."
+    },
+    {
+      "id": "p6",
+      "level": "everyday",
+      "question": "I'm having a baby. How much paid time off do I get as a new parent?",
+      "rank": null,
+      "page_rank": null,
+      "answer": "The sources do not give one global amount of paid time off for a new parent; the entitlement depends on location and local policy.\n\n- In **New York**, eligible employees can take New York Paid Family Leave during the first 12 months following the birth of a child [3]. Full-time employees working 20+ hours per week are eligible after 26 consecutive weeks, and part-time employees are eligible after 175 days [3]. The source gives an example benefit of $670 per week for an employee earning $1,000 per week, funded through employee payroll contributions [3]. NYPFL cannot be used by expectant mothers for their own pregnancy and begins after birth [3].\n- In **Italy**, maternity leave is compulsory for up to two months before the due date and three months after birth, and during the five-month leave women are paid up to 80% of their wage [4].\n- In **Denmark**, mothers have 4 weeks of pregnancy leave plus 24 weeks of maternity leave, with 13 weeks transferable under certain conditions [5]. Fathers/co-mothers have 24 weeks of paternity leave, with 13 weeks transferable under certain conditions [5]. The maximum maternity/paternity payment in Denmark is DKK 4,865 per week in 2025 for full-time employees working 37 hours per week [5].\n- In **Israel**, full-time team members returning after maternity leave are entitled to a shorter working day by one hour each day for 4 months, and both parents can share this entitlement subject to written acknowledgment 21 days before the end of maternity leave [1]. This is a reduced working schedule, not stated as paid time off [1].\n\nThe New Parent Swag benefit is a gift bundle, not paid time off [2]. Caregiver sick time is for caring for an ill family member and is not described as parental leave [6].",
+      "seconds": 11,
+      "keywords_ok": false,
+      "judge": "WRONG",
+      "judge_reason": "It omits the expected 16 weeks of paid Parental Leave and instead says there is no global entitlement."
+    },
+    {
+      "id": "p7",
+      "level": "everyday",
+      "question": "Am I expected to work on my birthday?",
+      "rank": 2,
+      "page_rank": 2,
+      "answer": "The sources do not explicitly say whether you are expected to work on your birthday. They do say that GitLab encourages team members to take a day of vacation on their special day in alignment with the Paid Time Off Policy [2], and if the celebration falls over a weekend, to take an alternate day such as the Friday prior or Monday after [2]. So the guidance points toward taking vacation on your birthday rather than indicating an expectation to work.",
+      "seconds": 3,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "It conveys that GitLab encourages taking PTO on your birthday and an alternate Friday or Monday if it falls on a weekend, without contradicting the expected answer."
+    },
+    {
+      "id": "p8",
+      "level": "everyday",
+      "question": "How far ahead should I tell my boss before taking a week off?",
+      "rank": 4,
+      "page_rank": 4,
+      "answer": "For planned time off, you\u2019re expected to give your manager and team as much advance notice as possible, and specifically to provide at least twice as many days of advance notice as the duration of your planned absence [4]. For example, a 3-day absence requires at least 6 business days of notice [4], so a one-week absence (5 business days) would require at least 10 business days of advance notice under that rule. If the person you\u2019re telling is your rotation leader because you\u2019re on call, tell them ASAP and ideally 2\u20134 weeks ahead, with at least a week for emergencies unless the event doesn\u2019t allow advance notice [1].",
+      "seconds": 4,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "The system states the key rule of at least twice as many days of notice as the absence and correctly applies it to a 5-day week off needing at least 10 business days\u2019 notice."
+    },
+    {
+      "id": "p9",
+      "level": "everyday",
+      "question": "Do I get extra pay if I fill in for my manager for a few months?",
+      "rank": null,
+      "page_rank": 3,
+      "answer": "You may be eligible for interim compensation or an interim bonus, but it is not automatically \u201cextra pay\u201d just because you fill in for your manager. An interim role is considered only if the coverage need is longer than 30 days [3], and the interim role generally must be at a higher level than your current role [3]. If the role is lateral, an interim bonus may be considered if you take on 100% of the workload for 60 days or more in addition to your permanent full-time role, with approval from the People Business Partner and group leader [3]. For Go-to-Market roles, interim bonuses may also be available to people managers temporarily occupying a lateral or higher management position in addition to their permanent full-time role [3]. For acting roles, the decision on whether the role meets eligibility criteria rests with the Hiring Manager and Department head [3].\n\nWhen the interim period ends, your manager should review the Criteria for Eligibility for the Interim Bonus and submit an interim bonus request, including the full bonus calculation in a comment [1]. The manager submits the bonus in Workday as a one-time payment and must provide the start and end dates of the interim period [5]. You must be an active GitLab team member at the end of the interim role period to receive the bonus; if you leave during the interim period, you are not eligible for a prorated payment [5]. As a guideline, an interim period should last no less than 30 days and no more than 4 months [1]. If you successfully complete the interim period and move into the role permanently, the manager is responsible for creating a promotion document and recommending a compensation increase [1].",
+      "seconds": 6,
+      "keywords_ok": false,
+      "judge": "PARTIAL",
+      "judge_reason": "The system explains eligibility and process for an interim bonus but omits the key expected detail that the bonus is the greater of the $1,000 standard discretionary bonus or 10% of salary for the interim period."
+    },
+    {
+      "id": "p10",
+      "level": "everyday",
+      "question": "Do I have to answer work emails while I'm on maternity leave?",
+      "rank": 3,
+      "page_rank": 3,
+      "answer": "No, you are not required to respond to work-related emails while on leave: the handbook states that during GitLab Parental Leave you are not required to log into any GitLab systems, review or approve compensation documents, or respond to any work-related emails or deadlines [3]. It also says you may receive automated system emails and should disregard them [3]. Maternity leave runs concurrently with GitLab\u2019s Parental Leave [2].",
+      "seconds": 3,
+      "keywords_ok": true,
+      "judge": "CORRECT",
+      "judge_reason": "It states employees on maternity/parental leave are not required to log in, approve documents, or respond to work emails and should disregard automated system emails, matching the expected answer."
+    }
+  ]
+}

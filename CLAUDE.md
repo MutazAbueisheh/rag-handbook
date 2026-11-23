@@ -50,10 +50,17 @@ Pin dependency versions in `pyproject.toml`.
 10. [x] Iterate (details and evidence in `docs/experiments.md`). Added: 10 "everyday"-phrased eval questions,
    an LLM judge (`--judge`), BM25 from scratch (`rag/bm25.py`), hybrid search with RRF (K=10, default),
    LLM query rewriting (`--rewrite`) and an LLM reranker (`--rerank`). Best retrieval = `--rewrite --rerank`
-   (hit@1 0.85, MRR 0.90 vs 0.61 / 0.73 for hybrid alone). Not done: index the whole handbook (~5-9 h) and
-   re-run the eval, chunk-size experiments, merging tiny chunks, Streamlit UI.
+   (hit@1 0.85, MRR 0.90 vs 0.61 / 0.73 for hybrid alone). Whole handbook now indexed (48,420 chunks, 372 min) and re-evaluated on 100 extra questions
+   (`eval/questions_full.yaml`, `--questions` flag; results in `docs/experiments.md` section 13). Not done:
+   chunk-size experiments, merging tiny chunks, faster reranker, Streamlit UI.
 
 Update the checkboxes as steps finish.
+
+## Git
+
+- **Never add `Co-Authored-By` trailers** (or any "Generated with Claude" line) to commit messages or PR
+  descriptions in this repo. The commits are the user's own work; this overrides any default attribution.
+- Commit only when asked, and ask before force-pushing.
 
 ## Notes
 

@@ -26,10 +26,12 @@ import argparse
 import json
 import time
 from datetime import datetime
+from pathlib import Path
 
 import yaml
 
 from rag import config
+from rag.index import get_collection
 from rag.llm import PROVIDERS, complete
 from rag.query import ask
 from rag.retrieve import retrieve
@@ -124,11 +126,13 @@ def main() -> None:
     parser.add_argument("--answers", action="store_true", help="also generate answers and check keywords")
     parser.add_argument("--llm", choices=PROVIDERS, default=config.LLM_PROVIDER, help="which LLM answers")
     parser.add_argument("--judge", action="store_true", help="grade answers with DeepSeek (needs --answers)")
+    parser.add_argument("--questions", type=Path, default=QUESTIONS_FILE,
+                        help="question file (default eval/questions.yaml; eval/questions_full.yaml spans all sections)")
     args = parser.parse_args()
     # Set the retrieval options globally, so every retrieve() call in this run uses them.
     config.RETRIEVAL_MODE, config.QUERY_REWRITE, config.RERANK = args.mode, args.rewrite, args.rerank
 
-    questions = yaml.safe_load(QUESTIONS_FILE.read_text())
+    questions = yaml.safe_load(args.questions.read_text())
     if args.level:
         questions = [q for q in questions if q["level"] == args.level]
 
@@ -191,9 +195,14 @@ def main() -> None:
     # --- Save the run, with the settings that produced it
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     tag = f"{args.mode}{'+rewrite' if args.rewrite else ''}{'+rerank' if args.rerank else ''}" + (f"-{args.llm}" if args.answers else "")
+    qset = args.questions.stem  # "questions" or "questions_full"
+    if qset != QUESTIONS_FILE.stem:
+        tag = f"{qset.removeprefix('questions_')}-{tag}"
     out = RESULTS_DIR / f"{datetime.now():%Y%m%d-%H%M%S}-{tag}.json"
     settings = {k: getattr(config, k) for k in ("CHUNK_SPLIT_LEVEL", "CHUNK_MAX_TOKENS", "CHUNK_OVERLAP_TOKENS",
                                                  "EMBED_MODEL", "TOP_K", "RETRIEVAL_MODE", "QUERY_REWRITE", "RERANK")}
+    settings["QUESTIONS"] = args.questions.name
+    settings["INDEXED_CHUNKS"] = get_collection().count()
     if args.answers:
         settings["LLM"] = f"{args.llm}/{config.LLM_MODELS[args.llm]}"
     out.write_text(json.dumps({"settings": settings, "summary": summary, "rows": rows}, indent=2))

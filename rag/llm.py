@@ -38,7 +38,7 @@ def stream_deepseek(model: str, messages: list[dict], stats: dict) -> Iterator[s
     api_key = os.environ.get("DEEPSEEK_API_KEY")
     if not api_key:
         raise SystemExit("DEEPSEEK_API_KEY is not set in this shell (try: source ~/.bashrc)")
-    client = OpenAI(api_key=api_key, base_url=config.DEEPSEEK_BASE_URL)
+    client = OpenAI(api_key=api_key, base_url=config.DEEPSEEK_BASE_URL, timeout=120.0)
     stream = client.chat.completions.create(
         model=model,
         messages=messages,
@@ -64,4 +64,13 @@ PROVIDERS = {"ollama": stream_ollama, "deepseek": stream_deepseek}
 
 def complete(messages: list[dict], llm: str) -> str:
     """Non-streaming call: the whole reply as one string."""
-    return "".join(PROVIDERS[llm](config.LLM_MODELS[llm], messages, {}))
+    # Retry: one slow or dropped API call should not kill a long eval run.
+    for attempt in range(3):
+        try:
+            return "".join(PROVIDERS[llm](config.LLM_MODELS[llm], messages, {}))
+        except Exception as err:
+            # Retry timeouts, rate limits and server errors; a 4xx like "insufficient balance" will not fix itself.
+            status = getattr(err, "status_code", None)
+            if attempt == 2 or (status is not None and 400 <= status < 500 and status != 429):
+                raise
+            print(f"  (LLM call failed: {type(err).__name__}; retrying)", flush=True)

@@ -1,0 +1,778 @@
+{
+  "settings": {
+    "CHUNK_SPLIT_LEVEL": 3,
+    "CHUNK_MAX_TOKENS": 500,
+    "CHUNK_OVERLAP_TOKENS": 50,
+    "EMBED_MODEL": "nomic-embed-text",
+    "TOP_K": 6,
+    "RETRIEVAL_MODE": "hybrid",
+    "QUERY_REWRITE": true,
+    "RERANK": true,
+    "QUESTIONS": "questions_full.yaml",
+    "INDEXED_CHUNKS": 48420
+  },
+  "summary": {
+    "easy/chunk": {
+      "hit@1": 0.85,
+      "hit@3": 0.9,
+      "hit@6": 0.95,
+      "hit@10": 0.95,
+      "MRR": 0.8766666666666667
+    },
+    "easy/page": {
+      "hit@1": 0.9,
+      "hit@3": 0.95,
+      "hit@6": 0.95,
+      "hit@10": 0.95,
+      "MRR": 0.9166666666666666
+    },
+    "medium/chunk": {
+      "hit@1": 0.84,
+      "hit@3": 0.96,
+      "hit@6": 0.96,
+      "hit@10": 0.96,
+      "MRR": 0.9
+    },
+    "medium/page": {
+      "hit@1": 0.92,
+      "hit@3": 0.96,
+      "hit@6": 0.96,
+      "hit@10": 0.96,
+      "MRR": 0.94
+    },
+    "hard/chunk": {
+      "hit@1": 0.9,
+      "hit@3": 1.0,
+      "hit@6": 1.0,
+      "hit@10": 1.0,
+      "MRR": 0.9416666666666667
+    },
+    "hard/page": {
+      "hit@1": 1.0,
+      "hit@3": 1.0,
+      "hit@6": 1.0,
+      "hit@10": 1.0,
+      "MRR": 1.0
+    },
+    "everyday/chunk": {
+      "hit@1": 0.5666666666666667,
+      "hit@3": 0.7666666666666667,
+      "hit@6": 0.8,
+      "hit@10": 0.8333333333333334,
+      "MRR": 0.662037037037037
+    },
+    "everyday/page": {
+      "hit@1": 0.6666666666666666,
+      "hit@3": 0.8333333333333334,
+      "hit@6": 0.8333333333333334,
+      "hit@10": 0.8333333333333334,
+      "MRR": 0.7333333333333333
+    },
+    "all/chunk": {
+      "hit@1": 0.7684210526315789,
+      "hit@3": 0.8947368421052632,
+      "hit@6": 0.9157894736842105,
+      "hit@10": 0.9263157894736842,
+      "MRR": 0.8287134502923976
+    },
+    "all/page": {
+      "hit@1": 0.8526315789473684,
+      "hit@3": 0.9263157894736842,
+      "hit@6": 0.9263157894736842,
+      "hit@10": 0.9263157894736842,
+      "MRR": 0.8824561403508772
+    }
+  },
+  "rows": [
+    {
+      "id": "fe1",
+      "level": "easy",
+      "question": "What is the maximum an individual can spend per year on Individual Use software?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe2",
+      "level": "easy",
+      "question": "What does P.A.U.S.E stand for in the Power of the Pause?",
+      "rank": 5,
+      "page_rank": 1
+    },
+    {
+      "id": "fe3",
+      "level": "easy",
+      "question": "How long is the technical interview call?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe4",
+      "level": "easy",
+      "question": "How often does the CEO conduct skip-level meetings?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe5",
+      "level": "easy",
+      "question": "Within how many days must new team members complete their assigned compliance courses?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe6",
+      "level": "easy",
+      "question": "Where should work stopping handbook issues be reported?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe7",
+      "level": "easy",
+      "question": "Is Backblaze installed by default on company devices?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe8",
+      "level": "easy",
+      "question": "What are the six phases of the Risk Management cycle?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm1",
+      "level": "medium",
+      "question": "Can I buy software with my credit card and get the money back?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm2",
+      "level": "medium",
+      "question": "Are receipts needed for meals during sponsored (customer-billable) travel?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm3",
+      "level": "medium",
+      "question": "Are skip-level meetings recorded?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm4",
+      "level": "medium",
+      "question": "How much time does a new lead owner have to action an MQL after a reassignment?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm5",
+      "level": "medium",
+      "question": "Which team members must take the Anti-Bribery and Corruption course?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm6",
+      "level": "medium",
+      "question": "How far ahead of the technical interview does the candidate get the merge request?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm7",
+      "level": "medium",
+      "question": "When is a vulnerability in GitLab's code considered fixed?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm8",
+      "level": "medium",
+      "question": "Which Sentry projects should support check to find an error for a GitLab.com user?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm9",
+      "level": "medium",
+      "question": "Should interviewers ask trick questions in a panel interview?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh1",
+      "level": "hard",
+      "question": "A new US-based individual contributor joins the Finance team. Which compliance and anti-harassment courses are they enrolled in, and how long is the harassment course?",
+      "rank": 2,
+      "page_rank": 1
+    },
+    {
+      "id": "fh2",
+      "level": "hard",
+      "question": "I need a $6,000 per year software subscription just for me. Can I buy it on my corporate card, and what process applies?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh3",
+      "level": "hard",
+      "question": "For the technical interview, how many hours do I have between receiving the merge request at the earliest deadline and the time my review must be done?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh4",
+      "level": "hard",
+      "question": "Why could an MQL show an SLA time of 00:00:00 and still be marked Met?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh5",
+      "level": "hard",
+      "question": "An external consultant gets accounts and repository access for a 3-month engagement. What two things must be set up on their accounts?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh6",
+      "level": "hard",
+      "question": "On sponsored travel I booked a hotel above the GSA rate without pre-approval. How much will be reimbursed?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh7",
+      "level": "hard",
+      "question": "Who won the GitLab company chess tournament in 2024?"
+    },
+    {
+      "id": "fh8",
+      "level": "hard",
+      "question": "What is the password of the shared company Zoom account?"
+    },
+    {
+      "id": "fp1",
+      "level": "everyday",
+      "question": "My boss's boss wants to meet my team without my manager. Is that normal, and will it be recorded?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp2",
+      "level": "everyday",
+      "question": "I'm flying to a customer for a paid project. Do I need to keep my food receipts?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp3",
+      "level": "everyday",
+      "question": "How long will the coding interview take?",
+      "rank": 2,
+      "page_rank": 2
+    },
+    {
+      "id": "fp4",
+      "level": "everyday",
+      "question": "Will IT back up all my laptop files with Backblaze?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp5",
+      "level": "everyday",
+      "question": "How do I get an Ask Me Anything session with an exec on the calendar?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp6",
+      "level": "everyday",
+      "question": "A vendor emailed me saying GitLab owes them money. Can I just agree to pay them to settle it?",
+      "rank": null,
+      "page_rank": null
+    },
+    {
+      "id": "fp7",
+      "level": "everyday",
+      "question": "I'm about to snap at someone on Slack. Any advice from the handbook?",
+      "rank": null,
+      "page_rank": null
+    },
+    {
+      "id": "fp8",
+      "level": "everyday",
+      "question": "How do I take a Mac screenshot straight to the clipboard?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe9",
+      "level": "easy",
+      "question": "How quickly must an on-call engineer acknowledge a page?",
+      "rank": 3,
+      "page_rank": 3
+    },
+    {
+      "id": "fe10",
+      "level": "easy",
+      "question": "What is the maximum duration of a long-term test quarantine?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe11",
+      "level": "easy",
+      "question": "What is the Application Security triage SLA for issues?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe12",
+      "level": "easy",
+      "question": "Below what monthly uptime can GitLab.com customers get downtime credits?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe13",
+      "level": "easy",
+      "question": "After how many days is an unconfirmed GitLab.com account blocked and scheduled for deletion?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe14",
+      "level": "easy",
+      "question": "How much is the patent award when a patent is issued to GitLab?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe15",
+      "level": "easy",
+      "question": "What email unsubscribe rate is considered good?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe16",
+      "level": "easy",
+      "question": "Within how many days must Navan card receipts be uploaded?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe17",
+      "level": "easy",
+      "question": "How much can a Quarterly MVP expense for the recognition dinner?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe18",
+      "level": "easy",
+      "question": "What are the Family and Friends Day dates for FY27?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe19",
+      "level": "easy",
+      "question": "How long are speedy meetings?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fe20",
+      "level": "easy",
+      "question": "What happens to team members without 2FA whose accounts are stale for over 30 days?",
+      "rank": null,
+      "page_rank": null
+    },
+    {
+      "id": "fm10",
+      "level": "medium",
+      "question": "Can on-call engineers recover after a demanding shift?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm11",
+      "level": "medium",
+      "question": "How long does an AppSec engineer have to complete a merge request review once they start working on it?",
+      "rank": null,
+      "page_rank": null
+    },
+    {
+      "id": "fm12",
+      "level": "medium",
+      "question": "How long does a customer have to submit a downtime credit claim?",
+      "rank": 2,
+      "page_rank": 1
+    },
+    {
+      "id": "fm13",
+      "level": "medium",
+      "question": "What is the minimum processing time for a Linux laptop for a new hire in EMEA?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm14",
+      "level": "medium",
+      "question": "What is the gift limit for a U.S. government official?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm15",
+      "level": "medium",
+      "question": "What are the limits for team meals on the Navan purchasing card?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm16",
+      "level": "medium",
+      "question": "Is a co-working space allowed on the Navan purchasing card?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm17",
+      "level": "medium",
+      "question": "When does GitLab.com lock an account without 2FA after failed sign-ins?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm18",
+      "level": "medium",
+      "question": "What is the target resolution time for a Severity 2 Customer Support Systems incident?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm19",
+      "level": "medium",
+      "question": "How long does Finance take to approve a CRO swag order?",
+      "rank": 2,
+      "page_rank": 1
+    },
+    {
+      "id": "fm20",
+      "level": "medium",
+      "question": "When should a CSM hold the kickoff call with a new customer?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm21",
+      "level": "medium",
+      "question": "What prize value limits apply to a conference sweepstakes under the standard process?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm22",
+      "level": "medium",
+      "question": "What happens to an Enterprise Data issue that is still missing required labels after 30 days?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm23",
+      "level": "medium",
+      "question": "After a laptop refresh, when must the old laptop be wiped or returned?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm24",
+      "level": "medium",
+      "question": "How long should a SIRT warm handoff take?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fm25",
+      "level": "medium",
+      "question": "How often at most should someone be on call in the SSCS Tier 2 rotation?",
+      "rank": 2,
+      "page_rank": 2
+    },
+    {
+      "id": "fh9",
+      "level": "hard",
+      "question": "Using the security gearing ratios, what would the top bug bounty reward be if GitLab were worth $5 billion?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh10",
+      "level": "hard",
+      "question": "A new hire outside North America, EMEA and APAC starts in 6 weeks and wants a Linux laptop. Is there enough processing time?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh11",
+      "level": "hard",
+      "question": "I'm sending CRO swag to someone outside the US. How long after Finance approval should I allow, and how long from placing the order?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh12",
+      "level": "hard",
+      "question": "For an enterprise prospect (deal over $100K ARR), what are the promotional incentive limits per incentive and per year?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh13",
+      "level": "hard",
+      "question": "I'm a named inventor on an invention GitLab accepts, files and later gets issued as a patent. How much do I receive in total?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh14",
+      "level": "hard",
+      "question": "GitLab.com had downtime in March. What is the deadline to claim a credit, and how long until the credit is issued?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh15",
+      "level": "hard",
+      "question": "Can I pay for a $6,000 per year tool with my Navan purchasing card?",
+      "rank": 3,
+      "page_rank": 1
+    },
+    {
+      "id": "fh16",
+      "level": "hard",
+      "question": "A fast-quarantined test is still broken after 3 days. What are the options, and when would it be deleted?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh17",
+      "level": "hard",
+      "question": "If the SIRT on-call engineer does not acknowledge a page, who gets paged next and when?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh18",
+      "level": "hard",
+      "question": "A Severity 3 Customer Support Systems incident has been unresolved for 10 hours. Should it be escalated, and what is the target resolution time?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh19",
+      "level": "hard",
+      "question": "Can a conference sweepstakes with $800 of total prizes include New Zealand?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh20",
+      "level": "hard",
+      "question": "My Support region has 25 engineers and 5 are already on PTO on my dates. If I take off too, what is the capacity status and what should I do?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh21",
+      "level": "hard",
+      "question": "For the SUS survey, who counts as an experienced user, and how active must a user be to be invited?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fh22",
+      "level": "hard",
+      "question": "How many free lunches per week does the GitLab office cafeteria serve?"
+    },
+    {
+      "id": "fh23",
+      "level": "hard",
+      "question": "Which hotel hosts GitLab's annual holiday gala?"
+    },
+    {
+      "id": "fh24",
+      "level": "hard",
+      "question": "What is the guest Wi-Fi password at the GitLab office?"
+    },
+    {
+      "id": "fh25",
+      "level": "hard",
+      "question": "I'm a newly hired senior engineer. Do I start as a code reviewer, and how long do I have to become a maintainer?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp9",
+      "level": "everyday",
+      "question": "I got paged at 3am while on call. How fast do I have to respond?",
+      "rank": 3,
+      "page_rank": 3
+    },
+    {
+      "id": "fp10",
+      "level": "everyday",
+      "question": "I was on call all weekend and I'm wiped out. Can I take some time off?",
+      "rank": 3,
+      "page_rank": 3
+    },
+    {
+      "id": "fp11",
+      "level": "everyday",
+      "question": "My new laptop arrived. What do I do with the old one?",
+      "rank": 9,
+      "page_rank": 3
+    },
+    {
+      "id": "fp12",
+      "level": "everyday",
+      "question": "I'm joining from Germany and want a Linux laptop on day one. How early does it need to be ordered?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp13",
+      "level": "everyday",
+      "question": "Is GitLab off between Christmas and New Year?",
+      "rank": null,
+      "page_rank": null
+    },
+    {
+      "id": "fp14",
+      "level": "everyday",
+      "question": "I want to give a gift to someone who works for the US government. How much can I spend?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp15",
+      "level": "everyday",
+      "question": "Can I take my whole team out to dinner on the company card?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp16",
+      "level": "everyday",
+      "question": "Can I pay for my WeWork membership with the purchasing card?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp17",
+      "level": "everyday",
+      "question": "A coworker's dad passed away. Can I send flowers with the purchasing card?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp18",
+      "level": "everyday",
+      "question": "I mistyped my password a few times and now my GitLab.com account is locked. Will it unlock by itself?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp19",
+      "level": "everyday",
+      "question": "I signed up for GitLab.com but never clicked the confirmation email. What happens?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp20",
+      "level": "everyday",
+      "question": "I deleted my free GitLab.com account. When can I reuse my username?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp21",
+      "level": "everyday",
+      "question": "GitLab.com was down a lot last month. Can our company get money back?",
+      "rank": 4,
+      "page_rank": 1
+    },
+    {
+      "id": "fp22",
+      "level": "everyday",
+      "question": "I came up with an invention at work. Do I get a bonus for it?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp23",
+      "level": "everyday",
+      "question": "I've got a meeting next week. When should I send the agenda?",
+      "rank": 3,
+      "page_rank": 1
+    },
+    {
+      "id": "fp24",
+      "level": "everyday",
+      "question": "We recorded a meeting. When should I post the recording?",
+      "rank": null,
+      "page_rank": null
+    },
+    {
+      "id": "fp25",
+      "level": "everyday",
+      "question": "A test keeps failing randomly and I was told to quarantine it. How long can it stay quarantined?",
+      "rank": 2,
+      "page_rank": 1
+    },
+    {
+      "id": "fp26",
+      "level": "everyday",
+      "question": "I review merge requests and I'm going on vacation. What should I do with my reviews?",
+      "rank": null,
+      "page_rank": null
+    },
+    {
+      "id": "fp27",
+      "level": "everyday",
+      "question": "I was picked as a quarterly MVP! Can I expense a fancy dinner?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp28",
+      "level": "everyday",
+      "question": "How long does it take for swag to arrive in the US?",
+      "rank": 2,
+      "page_rank": 2
+    },
+    {
+      "id": "fp29",
+      "level": "everyday",
+      "question": "Do support engineers get Family and Friends days off like everyone else?",
+      "rank": 1,
+      "page_rank": 1
+    },
+    {
+      "id": "fp30",
+      "level": "everyday",
+      "question": "I want to run a raffle at our conference booth. Are there limits on the prizes?",
+      "rank": 1,
+      "page_rank": 1
+    }
+  ]
+}

@@ -54,8 +54,16 @@ def vector_search(question: str, n: int, where: dict | None) -> list[str]:
 @lru_cache(maxsize=1)
 def corpus() -> tuple[list[str], list[str], list[dict], BM25]:
     """All chunks from Chroma plus a BM25 index over them, built once per process (~1 s)."""
-    data = get_collection().get(include=["documents", "metadatas"])
-    return data["ids"], data["documents"], data["metadatas"], BM25(data["documents"])
+    # Read in pages: one get() of the whole collection fails on the full handbook (~48k chunks)
+    # with SQLite's "too many SQL variables".
+    collection, page = get_collection(), 5000
+    ids, docs, metas = [], [], []
+    for offset in range(0, collection.count(), page):
+        data = collection.get(include=["documents", "metadatas"], limit=page, offset=offset)
+        ids += data["ids"]
+        docs += data["documents"]
+        metas += data["metadatas"]
+    return ids, docs, metas, BM25(docs)
 
 
 def bm25_search(question: str, n: int, sections: list[str] | None) -> list[str]:

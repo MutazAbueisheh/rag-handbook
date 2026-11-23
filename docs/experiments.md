@@ -370,9 +370,10 @@ The same configuration (hybrid + rewrite, K=10) run three times:
 | 2 | 0.48 | 0.94 | 0.97 | 0.68 | none |
 | 3 | 0.61 | 0.87 | 0.94 | 0.75 | 3 |
 
-**Inference.** DeepSeek returns different rewrites on every call, even at temperature 0, so one run can
-land well on either side. The earlier sweep (0.94) was a lucky draw rather than the true value. Any
-rewrite comparison needs several runs.
+**Inference.** DeepSeek returns different rewrites on every call, even at temperature 0. hit@1 moved
+between 0.48 and 0.61, and the vacation-cap chunk (m1) was found at rank 4, not at all, and rank 3 in the
+three runs, so a single run can land well on either side of the true value. Any rewrite comparison needs
+several runs.
 
 ### 10.6 End-to-end result (33 questions, DeepSeek answers, DeepSeek judge)
 
@@ -504,14 +505,17 @@ off by default are different: they need the network and a key, and they add 2 to
 | 21 | Add an LLM reranker (listwise, top 20 candidates, one DeepSeek call) | Best chunk was first only 61% of the time | hit@1 0.61 to 0.81, stable over 3 runs (section 10.7) |
 | 22 | Use rewrite and rerank together when the best retrieval is wanted | Each covers the other's weakness; only the pair fixes m1 | hit@6 0.97, MRR 0.90 (section 10.7) |
 | 23 | Keep `hybrid` as the default; rewrite and rerank stay opt-in | Offline, free, deterministic; end-to-end answers did not improve on this small set | 30/33 correct for both (section 10.8) |
+| 24 | Index the whole handbook (48,420 chunks) | Small index cannot show scale effects | 372 min, section 13 |
+| 25 | Add a 100-question set from the other sections, with trap questions | The old set reused handbook wording and saturated | Hybrid top 6: 0.90 old set, 0.81 new set (section 13.1) |
+| 26 | Recommend rewrite + rerank for best quality on the full index | Largest gain on everyday questions | Correct answers 76 to 87 of 100 (section 13.2) |
+| 27 | Retry only transient API errors | A balance error (402) cannot fix itself | Failed runs, section 13 |
 
 ## 12. Open items
 
-Step 10 is complete as far as the small index can measure. What is left needs the full index or more time:
+Step 10 is complete, and section 13 repeats the eval on the full index. What is left:
 
 
-1. **Index the whole handbook** (the main open item: the current eval cannot tell the configurations apart end to end) (about 5 to 9 h on CPU), then rerun the eval. Expect scores to drop,
-   since 30 times more chunks compete, and add questions from the other sections.
+1. ~~Index the whole handbook and add questions from the other sections~~ Done, see section 13.
 2. **Chunk-size experiments.** Each needs a ~14 min re-embed on the small index.
 3. **Tiny chunks:** merge or leave, to be decided by the eval.
 4. **Eval hygiene:** run rewrite comparisons several times, and re-label questions after seeing what
@@ -520,3 +524,75 @@ Step 10 is complete as far as the small index can measure. What is left needs th
 
 **Where the numbers come from:** `.venv/bin/python -m rag.evaluate [--mode hybrid] [--rewrite] [--answers
 --llm deepseek --judge]`. Saved runs are in `eval/results/`.
+
+## 13. The full handbook (48,420 chunks) and a 100-question eval
+
+**Indexing.** `rag.index --all` embedded the 46,846 chunks that were missing (1,574 already existed) in
+372 minutes (about 6.2 h, 2 chunks/s), inside the 5 to 9 h estimate. The collection now holds 48,420 chunks
+from all 4,621 pages. One scaling bug appeared: `corpus()` read the whole collection with one Chroma `get()`,
+which fails at this size with SQLite's "too many SQL variables". It now reads in pages of 5,000.
+
+**A bigger eval.** The original 33 questions come from 3 sections, so they cannot show what 30 times more
+chunks do. `eval/questions_full.yaml` adds 100 questions from the other sections (finance, legal, security,
+support, IT, engineering, marketing, sales, product, data, customer success, company, hiring, leadership,
+communication, tools): 20 easy, 25 medium, 25 hard (5 of them traps with no answer) and 30 everyday. Method:
+read the page, quote the fact, and let a script find the chunks that contain the quote (0 quotes unmatched). The
+trap topics were checked with grep to be absent from the handbook. `rag.evaluate --questions FILE` selects the file.
+
+### 13.1 Retrieval at scale (chunk level, 95 answerable questions)
+
+| Setup | Runs | Ranked first | In top 6 | MRR | Everyday: first / top 6 |
+|---|---|---|---|---|---|
+| Vector | 1 | 0.45 | 0.75 | 0.58 | 0.23 / 0.50 |
+| Hybrid (default) | 1 | 0.48 | 0.81 | 0.60 | 0.13 / 0.57 |
+| Hybrid + rerank | 3 | 0.75 (0.75-0.77) | 0.88 (0.87-0.89) | 0.81 | 0.59 / 0.74 |
+| Hybrid + rewrite + rerank | 3 | 0.79 (0.77-0.81) | 0.94 (0.92-0.96) | 0.85 | 0.63 / 0.86 |
+
+The original 33 questions on the full index (31 answerable): hybrid 0.45 / 0.84 / 0.60, rerank (3 runs)
+0.73 / 0.85 / 0.78, rewrite + rerank (3 runs) 0.77 / 0.91 / 0.84. On the small index the same questions gave
+hybrid 0.61 / 0.90 / 0.73, rerank 0.81 / 0.94 / 0.87, rewrite + rerank 0.85 / 0.97 / 0.90.
+
+**Inferences.**
+- Scale hurts the default. Hybrid reaches the top 6 for 81% of the new questions, and its first-place rate
+  on everyday questions is 13%, because plain wording ("WeWork", "paged at 3am") matches the handbook's
+  words poorly and 48k chunks hold many near matches.
+- The reranker gains more here than on the small index (first place 0.48 to 0.75, against 0.61 to 0.81) and
+  its three runs agree closely. Rewriting adds a further gain, mostly on everyday questions (top 6 0.74 to 0.86),
+  and varies more between runs (top 6 0.92 to 0.96). The first run alone (0.96) overstated it; use 0.94.
+- The old set barely moved because its wording follows the handbook. A set that only reuses the handbook's
+  words would have hidden the scale effect.
+
+### 13.2 End to end (DeepSeek answers, DeepSeek judge, correct / partial / wrong)
+
+| Setup | New 100 | Original 33 | Original 33, small index |
+|---|---|---|---|
+| Hybrid (default) | 76 / 12 / 12 | 25 / 6 / 2 | 30 / 3 / 0 |
+| Hybrid + rewrite + rerank | 87 / 8 / 5 | 28 / 4 / 1 | 30 / 3 / 0 |
+
+By level on the new 100, hybrid then rewrite + rerank: easy 17/2/1 then 19/1/0, medium 20/3/2 then 21/2/2,
+hard 24/1/0 then 23/2/0, everyday 15/6/9 then 24/3/3. All 5 trap questions were refused correctly in both
+setups. Answering took about 3 s per question in both.
+
+**Reading the judge's reasons for every non-correct answer** (done for both runs on the new 100):
+- With hybrid, 24 answers were not correct and 15 of them had no retrieved chunk in the top 10 (the model then
+  said "not in the handbook" or guessed). Retrieval is the main cause.
+- With rewrite + rerank, 13 were not correct. Only 5 had no retrieval hit. In the other 8 the right chunk was
+  retrieved, and most of those are partials that drop one detail (for example the "same quarter" condition of
+  the MVP dinner, or the 30-minute escalation of a severity-2 incident). Three cases (fm16, fp17, fp18) are
+  answers that add an exception or a second case the expected answer does not have; whether the added claim
+  is wrong or the label is too narrow was not checked against the pages.
+- fm15 (team meal limit) fails in both setups because the answer cites an $80 per-person limit from another
+  chunk. The cause was not investigated.
+
+**Inference.** On the small index end-to-end answers saturated at 30 of 33, so rewrite and rerank looked
+pointless. At scale they matter: 76 to 87 correct of 100, and 25 to 28 of the old 33. The decision to keep
+hybrid as the offline default stays, but for best quality the pair is now clearly worth its cost
+(about 13 s per question for the rerank call, plus the rewrite call).
+
+**Cost and time.** A rerank run over 100 questions took 17 to 25 min. One API run stopped on 402
+"Insufficient Balance" when the credit ran out, so `complete()` now retries timeouts and 5xx errors three
+times and fails fast on other 4xx errors.
+
+**Bug found by the eval itself.** YAML reads an unquoted `no` as `False`, so a keyword `[no]` crashed the
+keyword check. It is now quoted, and both question files were scanned for non-string keywords.
+
